@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState, useRef, useMemo } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
@@ -8,65 +8,67 @@ import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLanguage } from "@/lib/i18n";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const destinations = [
+const destinationData = [
   {
     id: 1,
-    name: "Sajek Valley",
-    description: "The 'Queen of Clouds', where you can touch the sky and experience breathtaking mountain sunrises.",
     image: "/images/destinations/sajek.jpg",
-    category: "Mountains",
+    categoryKey: "mountains" as const,
     gradient: "from-blue-400 to-indigo-500",
   },
   {
     id: 2,
-    name: "Cox's Bazar",
-    description: "Experience the world's longest natural sea beach with its golden sands and turquoise waters.",
     image: "/images/destinations/coxs.jpg",
-    category: "Beach",
+    categoryKey: "beach" as const,
     gradient: "from-amber-400 to-orange-500",
   },
   {
     id: 3,
-    name: "Saint Martin",
-    description: "Bangladesh's only coral island, a slice of paradise with crystal clear blue water and palm trees.",
     image: "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=2070&auto=format&fit=crop",
-    category: "Island",
+    categoryKey: "island" as const,
     gradient: "from-cyan-400 to-blue-500",
   },
   {
     id: 4,
-    name: "Bandarban",
-    description: "Venture into the heart of the hills, discover hidden waterfalls and the culture of the mountain tribes.",
     image: "/images/destinations/bandarban.jpg",
-    category: "Adventure",
+    categoryKey: "adventure" as const,
     gradient: "from-emerald-400 to-teal-500",
   },
   {
     id: 5,
-    name: "Sundarban",
-    description: "The world's largest mangrove forest, home to the majestic Royal Bengal Tiger and exotic wildlife.",
     image: "/images/destinations/sundarban.jpg.webp",
-    category: "Wildlife",
+    categoryKey: "wildlife" as const,
     gradient: "from-green-400 to-emerald-600",
   },
   {
     id: 6,
-    name: "Mirinja Valley",
-    description: "A hidden gem in Alikadam, offering stunning views of low-hanging clouds and lush green valleys.",
     image: "/images/destinations/mirinja.jpeg",
-    category: "Valley",
+    categoryKey: "valley" as const,
     gradient: "from-lime-400 to-green-500",
   },
 ];
 
 const ExploreDestinations = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const floatRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const destinations = useMemo(() => {
+    return destinationData.map((data) => {
+      const translation = t.destinations.items.find((item) => item.id === data.id);
+      return {
+        ...data,
+        name: translation?.name || "",
+        description: translation?.description || "",
+        category: t.destinations.categories[data.categoryKey],
+      };
+    });
+  }, [t.destinations]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { 
@@ -144,7 +146,7 @@ const ExploreDestinations = () => {
               transition={{ duration: 0.6 }}
               className="text-indigo-600 font-bold uppercase tracking-widest text-sm mb-4 block"
             >
-              Curated Experiences
+              {t.destinations.badge}
             </motion.span>
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
@@ -153,7 +155,7 @@ const ExploreDestinations = () => {
               transition={{ duration: 0.8 }}
               className="text-4xl md:text-6xl font-black text-slate-950 leading-tight"
             >
-              Explore <span className="text-gradient">Destinations</span>
+              {t.destinations.title} <span className="text-gradient">{t.destinations.titleAccent}</span>
             </motion.h2>
             <motion.p 
             initial={{ opacity: 0, x: 30 }}
@@ -162,7 +164,7 @@ const ExploreDestinations = () => {
             transition={{ duration: 0.8 }}
             className="text-slate-600 text-lg md:text-xl max-w-md pb-2"
           >
-            From the clouds of Sajek to the deep mangroves of Sundarban, discover the breathtaking beauty of Bangladesh.
+            {t.destinations.description}
           </motion.p>
           </div>
           <div className="flex items-center space-x-4 pb-2">
@@ -228,7 +230,7 @@ const ExploreDestinations = () => {
                     </p>
 
                     <div className="mt-6 flex items-center text-white font-bold text-sm tracking-wider uppercase group-hover:gap-4 gap-2 transition-all">
-                      Explore More
+                      {t.destinations.exploreMore}
                       <ChevronRight className="w-5 h-5" />
                     </div>
                   </div>

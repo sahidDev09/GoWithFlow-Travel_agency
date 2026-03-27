@@ -3,8 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
+import { useLanguage } from "@/lib/i18n";
 
 const Navbar = () => {
+  const { language, setLanguage, t } = useLanguage();
   const navRef = useRef<HTMLDivElement>(null);
   const menuItemsRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,11 +28,10 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Destinations", href: "#destinations" },
-    { name: "Events", href: "#" },
-    { name: "Gallery", href: "#" },
-    { name: "About Us", href: "#" },
+    { name: t.nav.home, href: "/" },
+    { name: t.nav.events, href: "#" },
+    { name: t.nav.gallery, href: "#" },
+    { name: t.nav.about, href: "#" },
   ];
 
   return (
@@ -38,7 +39,7 @@ const Navbar = () => {
       <nav
         ref={navRef}
         className={`pointer-events-auto transition-all duration-500 ease-out flex items-center justify-between px-8 py-3 rounded-full border border-slate-200/50 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] glass ${
-          isScrolled ? "max-w-[850px] w-full py-4 bg-white/90 scale-95 shadow-indigo-500/5 border-slate-100" : "max-w-[750px] w-full bg-white/60"
+          isScrolled ? "max-w-[950px] w-full py-4 bg-white/90 scale-95 shadow-indigo-500/5 border-slate-100" : "max-w-[850px] w-full bg-white/60"
         }`}
       >
         {/* Logo */}
@@ -46,9 +47,7 @@ const Navbar = () => {
           <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg group-hover:bg-indigo-500 transition-colors">
             TA
           </div>
-          <span className="text-xl font-black text-slate-900 group-hover:text-indigo-600 transition-colors">
-            Travel<span className="text-indigo-600 group-hover:text-indigo-800">Aid</span>
-          </span>
+          
         </Link>
 
         {/* Menu Items */}
@@ -68,11 +67,33 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* CTA Button */}
-        <button className="relative group overflow-hidden bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-xl transition-all hover:scale-105 active:scale-95">
-          <span className="relative z-10">Join Now</span>
-          <div className="absolute inset-0 bg-indigo-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-        </button>
+        <div className="flex items-center space-x-4">
+          {/* Language Switcher */}
+          <div className="flex items-center bg-slate-100/50 rounded-full p-1 border border-slate-200">
+            <button
+              onClick={() => setLanguage("en")}
+              className={`px-3 py-1 rounded-full text-[10px] font-black uppercase transition-all ${
+                language === "en" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
+              }`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLanguage("bn")}
+              className={`px-3 py-1 rounded-full text-[10px] font-black uppercase transition-all ${
+                language === "bn" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
+              }`}
+            >
+              বাংলা
+            </button>
+          </div>
+
+          {/* CTA Button */}
+          <button className="relative group overflow-hidden bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-xl transition-all hover:scale-105 active:scale-95">
+            <span className="relative z-10">{t.nav.joinNow}</span>
+            <div className="absolute inset-0 bg-indigo-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+          </button>
+        </div>
       </nav>
     </div>
   );

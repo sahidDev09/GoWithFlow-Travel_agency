@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLanguage } from "@/lib/i18n";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
+  const { t } = useLanguage();
   const titleRef = useRef<HTMLSpanElement>(null);
   const subtitleRef = useRef<HTMLSpanElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -174,24 +176,24 @@ const Hero = () => {
         <div className="relative z-30 text-center max-w-5xl px-4 flex flex-col items-center space-y-10">
           <div className="space-y-4">
             <h1 className="text-5xl md:text-8xl font-black text-[#020617] drop-shadow-[0_10px_30px_rgba(255,255,255,1)] drop-shadow-[0_4px_10px_rgba(0,0,0,0.1)] uppercase flex flex-col items-center leading-none">
-              <span ref={titleRef} className="text-indigo-700 md:text-8xl text-5xl block">Travel Aid</span>
-              <span ref={subtitleRef} className="text-xl md:text-4xl font-extrabold text-slate-950 mt-2 block text-center leading-tight">Sylhet&apos;s Most Trusted Gateway <br/> to Hidden Wonders</span>
+              <span ref={titleRef} className="text-indigo-700 md:text-8xl text-5xl block">{t.hero.title}</span>
+              <span ref={subtitleRef} className="text-xl md:text-4xl font-extrabold text-slate-950 mt-2 block text-center leading-tight">{t.hero.subtitle}</span>
             </h1>
           </div>
 
           <p ref={textRef} className="text-xl md:text-2xl text-slate-950 max-w-3xl mx-auto drop-shadow-[0_5px_15px_rgba(255,255,255,1)] drop-shadow-[0_2px_5px_rgba(0,0,0,0.05)] leading-relaxed antialiased font-medium">
-            From lush tea gardens to cascading waterfalls, explore the true essence of Sylhet with the region&apos;s most trusted tour experts.
+            {t.hero.description}
           </p>
           
           <div ref={buttonsRef} className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 pt-4">
             <button className="bg-slate-950 text-white px-12 py-5 rounded-full text-xl font-black shadow-2xl transition-all hover:bg-indigo-600 hover:scale-110 active:scale-95 flex items-center group">
-              Book Escape
+              {t.hero.bookEscape}
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
             <button className="glass px-12 py-5 rounded-full text-xl font-black shadow-xl transition-all hover:bg-white text-slate-900 border-2 border-slate-900/5 hover:border-indigo-600/20">
-              View Gallery
+              {t.hero.viewGallery}
             </button>
           </div>
         </div>
@@ -224,7 +226,7 @@ const Hero = () => {
           transition={{ delay: 2, duration: 1 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center space-y-2"
         >
-          <span className="text-[10px] font-black uppercase text-slate-900/60 font-sans">Scroll Down</span>
+          <span className="text-[10px] font-black uppercase text-slate-900/60 font-sans">{t.hero.scrollDown}</span>
           <div className="h-8 w-[1px] bg-slate-900/20" />
         </motion.div>
       </section>
