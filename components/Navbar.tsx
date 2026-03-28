@@ -31,7 +31,7 @@ const Navbar = () => {
     { name: t.nav.home, href: "/" },
     { name: t.nav.events, href: "/#events" },
     { name: t.nav.gallery, href: "/gallery" },
-    { name: t.nav.about, href: "/#about" },
+    { name: t.nav.about, href: "/about" },
   ];
 
   return (

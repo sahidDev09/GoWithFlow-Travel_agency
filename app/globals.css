@@ -231,3 +231,19 @@ html.lenis body {
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
+
+/* Marquee Animations */
+@keyframes marquee-content-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-content {
+  display: flex !important;
+  width: max-content !important;
+  animation: marquee-content-scroll 40s linear infinite;
+}
+
+.animate-marquee-content:hover {
+  animation-play-state: paused;
+}

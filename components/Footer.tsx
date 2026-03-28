@@ -28,10 +28,10 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { name: t.footer.links.about, href: "#about" },
-    { name: t.footer.links.destinations, href: "#destinations" },
-    { name: t.footer.links.events, href: "#events" },
-    { name: t.footer.links.gallery, href: "#gallery" },
+    { name: t.footer.links.about, href: "/about" },
+    { name: t.footer.links.destinations, href: "/#destinations" },
+    { name: t.footer.links.events, href: "/#events" },
+    { name: t.footer.links.gallery, href: "/gallery" },
   ];
 
   const legalLinks = [

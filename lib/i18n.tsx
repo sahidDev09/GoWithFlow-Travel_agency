@@ -151,6 +151,34 @@ type TranslationSet = {
       terms: string;
     };
   };
+  about: {
+    badge: string;
+    title: string;
+    titleAccent: string;
+    description: string;
+    missionTitle: string;
+    missionDesc: string;
+    visionTitle: string;
+    visionDesc: string;
+    chairmanTitle: string;
+    chairmanName: string;
+    chairmanQuote: string;
+    founderTitle: string;
+    founderName: string;
+    founderQuote: string;
+    globeTitle: string;
+    globeDesc: string;
+    contact: {
+      title: string;
+      subtitle: string;
+      name: string;
+      email: string;
+      subject: string;
+      message: string;
+      send: string;
+      success: string;
+    };
+  };
 };
 
 const translations: Record<Language, TranslationSet> = {
@@ -393,7 +421,7 @@ const translations: Record<Language, TranslationSet> = {
       rights: "All rights reserved.",
       address: "Zindabazar, Sylhet, Bangladesh",
       phone: "+880 1700-000000",
-      email: "info@travelaid.com",
+      email: "sahid@gmail.com",
       links: {
         about: "About Us",
         destinations: "Destinations",
@@ -401,6 +429,34 @@ const translations: Record<Language, TranslationSet> = {
         gallery: "Gallery",
         privacy: "Privacy Policy",
         terms: "Terms of Service",
+      },
+    },
+    about: {
+      badge: "Get to know us",
+      title: "Our Story &",
+      titleAccent: "Journey",
+      description: "Founded with a passion for exploration, GoWithFlow has become the benchmark for luxury and adventure travel in the region.",
+      missionTitle: "Our Mission",
+      missionDesc: "To provide authentic, sustainable, and life-changing travel experiences that connect people with the hidden gems of Bangladesh.",
+      visionTitle: "Our Vision",
+      visionDesc: "To be the leading global gateway for travelers seeking to discover the unexplored beauty of our land with comfort and care.",
+      chairmanTitle: "Chairman",
+      chairmanName: "Mr. Zahirul Islam",
+      chairmanQuote: "Travel is not just about visiting places; it's about shifting your perspective on the world.",
+      founderTitle: "Founder & CEO",
+      founderName: "Ashraful Karim",
+      founderQuote: "We started GoWithFlow to share the raw beauty of our country that often goes unnoticed by the world.",
+      globeTitle: "Global Footprint",
+      globeDesc: "We facilitate journeys across the most breathtaking landscapes, connecting heritage with modern luxury.",
+      contact: {
+        title: "Get in Touch",
+        subtitle: "Have questions? We're here to help you plan your next adventure.",
+        name: "Full Name",
+        email: "Email Address",
+        subject: "Subject",
+        message: "Message",
+        send: "Send Message",
+        success: "Message sent successfully!",
       },
     },
   },
@@ -638,7 +694,7 @@ const translations: Record<Language, TranslationSet> = {
       rights: "সর্বস্বত্ব সংরক্ষিত।",
       address: "জিন্দাবাজার, সিলেট, বাংলাদেশ",
       phone: "+৮৮০ ১৭০০-০০০০০০",
-      email: "info@travelaid.com",
+      email: "sahid@gmail.com",
       links: {
         about: "আমাদের সম্পর্কে",
         destinations: "গন্তব্যস্থল",
@@ -646,6 +702,34 @@ const translations: Record<Language, TranslationSet> = {
         gallery: "গ্যালারি",
         privacy: "প্রাইভেসি পলিসি",
         terms: "শর্তাবলী",
+      },
+    },
+    about: {
+      badge: "আমাদের সম্পর্কে জানুন",
+      title: "আমাদের গল্প এবং",
+      titleAccent: "যাত্রা",
+      description: "অন্বেষণের প্রতি গভীর ভালোবাসা থেকে জন্ম নেওয়া GoWithFlow আজ এই অঞ্চলের বিলাসবহুল এবং রোমাঞ্চকর ভ্রমণের মানদণ্ডে পরিণত হয়েছে।",
+      missionTitle: "আমাদের লক্ষ্য",
+      missionDesc: "বাংলাদেশের লুকানো সৌন্দর্যগুলোর সাথে মানুষের সংযোগ ঘটিয়ে বিশুদ্ধ, টেকসই এবং জীবন বদলে দেওয়া ভ্রমণ অভিজ্ঞতা প্রদান করা।",
+      visionTitle: "আমাদের দৃষ্টিভঙ্গি",
+      visionDesc: "আরাম এবং যত্নের সাথে আমাদের দেশের অনাবিষ্কৃত সৌন্দর্য অন্বেষণকারী পর্যটকদের জন্য শীর্ষস্থানীয় বৈশ্বিক প্রবেশদ্বার হওয়া।",
+      chairmanTitle: "চেয়ারম্যান",
+      chairmanName: "জনাব জহিরুল ইসলাম",
+      chairmanQuote: "ভ্রমণ মানে শুধু জায়গা ঘুরে দেখা নয়; এটি হলো বিশ্বের প্রতি আপনার দৃষ্টিভঙ্গি বদলে দেওয়া।",
+      founderTitle: "প্রতিষ্ঠাতা ও সিইও",
+      founderName: "আশরাফুল করিম",
+      founderQuote: "আমরা GoWithFlow শুরু করেছি আমাদের দেশের সেই আদিম সৌন্দর্য সবার মাঝে ছড়িয়ে দিতে যা প্রায়ই বিশ্বের নজরের বাইরে থেকে যায়।",
+      globeTitle: "বৈশ্বিক পদচিহ্ন",
+      globeDesc: "আমরা ঐতিহ্যের সাথে আধুনিক বিলাসিতার সমন্বয় ঘটিয়ে সবচেয়ে চমৎকার ল্যান্ডস্কেপ জুড়ে ভ্রমণের ব্যবস্থা করি।",
+      contact: {
+        title: "যোগাযোগ করুন",
+        subtitle: "প্রশ্ন আছে? আপনার পরবর্তী অ্যাডভেঞ্চারের পরিকল্পনায় আমরা সাহায্য করতে প্রস্তুত।",
+        name: "পূর্ণ নাম",
+        email: "ইমেইল ঠিকানা",
+        subject: "বিষয়",
+        message: "বার্তা",
+        send: "বার্তা পাঠান",
+        success: "বার্তাটি সফলভাবে পাঠানো হয়েছে!",
       },
     },
   },

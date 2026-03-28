@@ -428,7 +428,7 @@ const UpcomingEvents = () => {
                             required
                             type="text"
                             className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
-                            placeholder="John Doe"
+                            placeholder="Sahid"
                           />
                         </div>
                         {bookingType === "couple" && (
@@ -466,7 +466,7 @@ const UpcomingEvents = () => {
                             required
                             type="email"
                             className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
-                            placeholder="example@mail.com"
+                            placeholder="sahid@gmail.com"
                           />
                         </div>
                       </div>
