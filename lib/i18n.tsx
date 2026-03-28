@@ -61,7 +61,7 @@ type DestinationsTranslations = {
   items: DestinationItem[];
 };
 
-type EventItem = {
+export type EventItem = {
   id: number;
   destination: string;
   date: string;
@@ -91,6 +91,24 @@ type EventsTranslations = {
   perPerson: string;
   couplePackage: string;
   bookingMoneyLabel: string;
+  bookingModal: {
+    title: string;
+    selection: string;
+    solo: string;
+    couple: string;
+    fullName: string;
+    phoneNumber: string;
+    emailAddress: string;
+    partnerName: string;
+    transactionId: string;
+    paymentInfo: string;
+    bankDetails: string;
+    bkashDetails: string;
+    submit: string;
+    successTitle: string;
+    successDesc: string;
+    close: string;
+  };
   items: EventItem[];
 };
 
@@ -99,6 +117,24 @@ type TranslationSet = {
   hero: HeroTranslations;
   destinations: DestinationsTranslations;
   events: EventsTranslations;
+  footer: {
+    description: string;
+    quickLinks: string;
+    contactUs: string;
+    followUs: string;
+    rights: string;
+    address: string;
+    phone: string;
+    email: string;
+    links: {
+      about: string;
+      destinations: string;
+      events: string;
+      gallery: string;
+      privacy: string;
+      terms: string;
+    };
+  };
 };
 
 const translations: Record<Language, TranslationSet> = {
@@ -243,6 +279,24 @@ const translations: Record<Language, TranslationSet> = {
       perPerson: "Per Person",
       couplePackage: "Couple Package",
       bookingMoneyLabel: "Booking Money",
+      bookingModal: {
+        title: "Complete Your Booking",
+        selection: "Select Booking Type",
+        solo: "Solo Traveler",
+        couple: "Couple / Pair",
+        fullName: "Full Name",
+        phoneNumber: "Phone Number",
+        emailAddress: "Email Address",
+        partnerName: "Partner's Full Name",
+        transactionId: "Payment Transaction ID",
+        paymentInfo: "Payment Information",
+        bankDetails: "Bank: Dutch-Bangla Bank\nA/C: 123.456.7890\nName: Travel Aid",
+        bkashDetails: "bKash (Personal): 01700-000000",
+        submit: "Confirm Booking",
+        successTitle: "Congratulations!",
+        successDesc: "Your booking request has been submitted successfully. Our team will verify the payment and contact you shortly.",
+        close: "Close"
+      },
       items: [
         {
           id: 1,
@@ -284,6 +338,24 @@ const translations: Record<Language, TranslationSet> = {
           inclusions: ["Ship Tickets", "Beach View Hotel", "Seafood Dinner", "Scuba Diving", "Island Tour"]
         }
       ]
+    },
+    footer: {
+      description: "Sylhet's most trusted gateway to hidden wonders. We curate experiences that last a lifetime.",
+      quickLinks: "Quick Links",
+      contactUs: "Contact Us",
+      followUs: "Follow Us",
+      rights: "All rights reserved.",
+      address: "Zindabazar, Sylhet, Bangladesh",
+      phone: "+880 1700-000000",
+      email: "info@travelaid.com",
+      links: {
+        about: "About Us",
+        destinations: "Destinations",
+        events: "Upcoming Events",
+        gallery: "Gallery",
+        privacy: "Privacy Policy",
+        terms: "Terms of Service",
+      },
     },
   },
   bn: {
@@ -422,6 +494,24 @@ const translations: Record<Language, TranslationSet> = {
       perPerson: "জনপ্রতি",
       couplePackage: "কাপল প্যাকেজ",
       bookingMoneyLabel: "বুকিং মানি",
+      bookingModal: {
+        title: "বুকিং সম্পন্ন করুন",
+        selection: "বুকিংয়ের ধরন নির্বাচন করুন",
+        solo: "একক ভ্রমণকারী",
+        couple: "কাপল / জোড়া",
+        fullName: "পূর্ণ নাম",
+        phoneNumber: "ফোন নম্বর",
+        emailAddress: "ইমেইল ঠিকানা",
+        partnerName: "সঙ্গীর পূর্ণ নাম",
+        transactionId: "পেমেন্ট ট্রানজেকশন আইডি",
+        paymentInfo: "পেমেন্ট সংক্রান্ত তথ্য",
+        bankDetails: "ব্যাংক: ডাচ-বাংলা ব্যাংক\nA/C: ১২৩.৪৫৬.৭৮৯০\nনাম: ট্রাভেল এইড",
+        bkashDetails: "বিকাশ (পার্সোনাল): ০১৭০০-০০০০০০",
+        submit: "বুকিং নিশ্চিত করুন",
+        successTitle: "অভিনন্দন!",
+        successDesc: "আপনার বুকিং অনুরোধটি সফলভাবে জমা দেওয়া হয়েছে। আমাদের টিম পেমেন্ট যাচাই করে শীঘ্রই আপনার সাথে যোগাযোগ করবে।",
+        close: "বন্ধ করুন"
+      },
       items: [
         {
           id: 1,
@@ -463,6 +553,24 @@ const translations: Record<Language, TranslationSet> = {
           inclusions: ["শিপ টিকিট", "বিচ ভিউ হোটেল", "সীফুড ডিনার", "স্কুবা ডাইভিং", "আইল্যান্ড ট্যুর"]
         }
       ]
+    },
+    footer: {
+      description: "লুকানো বিস্ময়ের সন্ধানে সিলেটের সবচেয়ে নির্ভরযোগ্য প্রবেশদ্বার। আমরা এমন অভিজ্ঞতা তৈরি করি যা জীবনভর মনে থাকবে।",
+      quickLinks: "দ্রুত লিঙ্ক",
+      contactUs: "যোগাযোগ",
+      followUs: "আমাদের অনুসরণ করুন",
+      rights: "সর্বস্বত্ব সংরক্ষিত।",
+      address: "জিন্দাবাজার, সিলেট, বাংলাদেশ",
+      phone: "+৮৮০ ১৭০০-০০০০০০",
+      email: "info@travelaid.com",
+      links: {
+        about: "আমাদের সম্পর্কে",
+        destinations: "গন্তব্যস্থল",
+        events: "আসন্ন ইভেন্ট",
+        gallery: "গ্যালারি",
+        privacy: "প্রাইভেসি পলিসি",
+        terms: "শর্তাবলী",
+      },
     },
   },
 };

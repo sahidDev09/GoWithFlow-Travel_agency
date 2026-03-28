@@ -12,9 +12,17 @@ import {
   CheckCircle2, 
   ArrowRight,
   TrendingUp,
-  Clock
+  Clock,
+  X,
+  CreditCard,
+  Phone,
+  Mail,
+  User,
+  CheckCircle,
+  AlertCircle
 } from "lucide-react";
-import { useLanguage } from "@/lib/i18n";
+import { AnimatePresence } from "framer-motion";
+import { useLanguage, EventItem } from "@/lib/i18n";
 
 // Import Swiper styles
 import "swiper/css";
@@ -75,6 +83,33 @@ const CountdownTimer = ({ deadline }: { deadline: string }) => {
 
 const UpcomingEvents = () => {
   const { t } = useLanguage();
+  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [bookingType, setBookingType] = useState<"solo" | "couple">("solo");
+
+  const handleBookNow = (event: EventItem) => {
+    setSelectedEvent(event);
+    setBookingType("solo");
+    setIsModalOpen(true);
+  };
+
+  const handleBookingSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsModalOpen(false);
+    setShowSuccess(true);
+  };
+
+  // Prevent scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen || showSuccess) {
+      document.body.style.overflow = "hidden";
+      if (window.lenisInstance) window.lenisInstance.stop();
+    } else {
+      document.body.style.overflow = "unset";
+      if (window.lenisInstance) window.lenisInstance.start();
+    }
+  }, [isModalOpen, showSuccess]);
 
   return (
     <section id="events" className="py-14 bg-slate-50 relative overflow-hidden">
@@ -236,7 +271,10 @@ const UpcomingEvents = () => {
                           </div>
                         </div>
                         
-                        <button className="group relative flex-1 flex items-center justify-center gap-3 bg-slate-900 text-white px-6 py-4 rounded-2xl font-bold transition-all hover:bg-indigo-600 hover:scale-[1.02] active:scale-95 shadow-xl shadow-slate-900/10 overflow-hidden">
+                        <button 
+                          onClick={() => handleBookNow(event)}
+                          className="group relative flex-1 flex items-center justify-center gap-3 bg-slate-900 text-white px-6 py-4 rounded-2xl font-bold transition-all hover:bg-indigo-600 hover:scale-[1.02] active:scale-95 shadow-xl shadow-slate-900/10 overflow-hidden"
+                        >
                           <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/0 via-white/10 to-indigo-600/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                           <span>{t.events.bookNow}</span>
                           <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -250,6 +288,251 @@ const UpcomingEvents = () => {
           </Swiper>
         </div>
       </div>
+
+      {/* Booking Modal */}
+      <AnimatePresence>
+        {isModalOpen && selectedEvent && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-5xl bg-white rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)] overflow-hidden max-h-[90vh] flex flex-col"
+            >
+              <div className="p-6 md:p-8 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0 z-10">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-600/20">
+                    <Calendar className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black text-slate-900 leading-none mb-1">{t.events.bookingModal.title}</h3>
+                    <p className="text-sm text-indigo-600 font-bold uppercase tracking-wider">{selectedEvent.destination}</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="p-3 hover:bg-slate-100 rounded-2xl transition-all group active:scale-95"
+                >
+                  <X className="w-6 h-6 text-slate-400 group-hover:text-slate-900 transition-colors" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto">
+                <div className="flex flex-col lg:flex-row min-h-full">
+                  {/* Left Column: Payment Information */}
+                  <div className="w-full lg:w-[40%] bg-slate-50 p-8 md:p-10 border-r border-slate-100">
+                    <div className="space-y-8">
+                      <div>
+                        <div className="flex items-center gap-3 text-indigo-600 mb-4">
+                          <CreditCard className="w-6 h-6" />
+                          <h4 className="text-lg font-bold tracking-tight">{t.events.bookingModal.paymentInfo}</h4>
+                        </div>
+                        <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                         Please complete the payment to our official accounts below and provide the transaction ID for verification.
+                        </p>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                          <div className="flex items-center gap-2 text-slate-400 text-[10px] font-black uppercase tracking-widest mb-3">
+                            <TrendingUp className="w-3 h-3" />
+                            <span>Bank Transfer</span>
+                          </div>
+                          <div className="text-slate-800 font-bold whitespace-pre-line leading-relaxed">
+                            {t.events.bookingModal.bankDetails}
+                          </div>
+                        </div>
+
+                        <div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                          <div className="flex items-center gap-2 text-fuchsia-500 text-[10px] font-black uppercase tracking-widest mb-3">
+                            <Phone className="w-3 h-3" />
+                            <span>Mobile Banking</span>
+                          </div>
+                          <div className="text-slate-800 font-bold leading-relaxed">
+                            {t.events.bookingModal.bkashDetails}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="p-6 bg-blue-50/50 rounded-3xl border border-blue-100">
+                        <div className="flex items-start gap-4">
+                          <AlertCircle className="w-5 h-5 text-blue-500 mt-0.5" />
+                          <p className="text-xs text-blue-700 leading-relaxed font-medium">
+                            Our team will verify your transaction within 2-4 hours and confirm your booking via phone and email.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Booking Form */}
+                  <div className="w-full lg:w-[60%] p-8 md:p-10">
+                    <form onSubmit={handleBookingSubmit} className="space-y-8">
+                      {/* Booking Type Selection */}
+                      <div className="space-y-4">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">
+                          {t.events.bookingModal.selection}
+                        </label>
+                        <div className="grid grid-cols-2 gap-4">
+                          <button
+                            type="button"
+                            onClick={() => setBookingType("solo")}
+                            className={`group flex items-center justify-center gap-4 p-5 rounded-2xl border-2 transition-all duration-300 ${
+                              bookingType === "solo"
+                                ? "border-indigo-600 bg-indigo-50 text-indigo-600 shadow-md shadow-indigo-600/5"
+                                : "border-slate-100 hover:border-slate-200 text-slate-500 hover:bg-slate-50"
+                            }`}
+                          >
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                              bookingType === "solo" ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200"
+                            }`}>
+                              <User className="w-5 h-5" />
+                            </div>
+                            <span className="font-black tracking-tight">{t.events.bookingModal.solo}</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setBookingType("couple")}
+                            className={`group flex items-center justify-center gap-4 p-5 rounded-2xl border-2 transition-all duration-300 ${
+                              bookingType === "couple"
+                                ? "border-indigo-600 bg-indigo-50 text-indigo-600 shadow-md shadow-indigo-600/5"
+                                : "border-slate-100 hover:border-slate-200 text-slate-500 hover:bg-slate-50"
+                            }`}
+                          >
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                              bookingType === "couple" ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200"
+                            }`}>
+                              <Users className="w-5 h-5" />
+                            </div>
+                            <span className="font-black tracking-tight">{t.events.bookingModal.couple}</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                            <User className="w-3.5 h-3.5" />
+                            {t.events.bookingModal.fullName}
+                          </label>
+                          <input
+                            required
+                            type="text"
+                            className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
+                            placeholder="John Doe"
+                          />
+                        </div>
+                        {bookingType === "couple" && (
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                              <Users className="w-3.5 h-3.5" />
+                              {t.events.bookingModal.partnerName}
+                            </label>
+                            <input
+                              required
+                              type="text"
+                              className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
+                              placeholder="Partner's Name"
+                            />
+                          </div>
+                        )}
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                            <Phone className="w-3.5 h-3.5" />
+                            {t.events.bookingModal.phoneNumber}
+                          </label>
+                          <input
+                            required
+                            type="tel"
+                            className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
+                            placeholder="01XXX-XXXXXX"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                            <Mail className="w-3.5 h-3.5" />
+                            {t.events.bookingModal.emailAddress}
+                          </label>
+                          <input
+                            required
+                            type="email"
+                            className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
+                            placeholder="example@mail.com"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          {t.events.bookingModal.transactionId}
+                        </label>
+                        <input
+                          required
+                          type="text"
+                          className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
+                          placeholder="TXN12345678"
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="group w-full relative h-[72px] bg-slate-900 text-white rounded-[1.25rem] font-black text-lg flex items-center justify-center gap-4 hover:bg-indigo-600 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-slate-900/10 overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                        <span>{t.events.bookingModal.submit}</span>
+                        <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccess && (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowSuccess(false)}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="relative w-full max-w-md bg-white rounded-3xl p-8 text-center shadow-2xl"
+            >
+              <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-10 h-10 text-emerald-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">{t.events.bookingModal.successTitle}</h3>
+              <p className="text-slate-600 mb-8 leading-relaxed">
+                {t.events.bookingModal.successDesc}
+              </p>
+              <button
+                onClick={() => setShowSuccess(false)}
+                className="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold hover:bg-slate-800 transition-all shadow-lg"
+              >
+                {t.events.bookingModal.close}
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <style jsx global>{`
         .swiper-pagination-bullet {

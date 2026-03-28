@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ExploreDestinations from "@/components/ExploreDestinations";
 import UpcomingEvents from "@/components/UpcomingEvents";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <UpcomingEvents />
       <ExploreDestinations />
+      <Footer />
     </main>
   );
 }

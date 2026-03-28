@@ -5,6 +5,12 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+declare global {
+  interface Window {
+    lenisInstance?: Lenis;
+  }
+}
+
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
@@ -24,13 +30,16 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     });
 
     lenisRef.current = lenis;
+    window.lenisInstance = lenis;
 
     // Connect Lenis to GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    function update(time: number) {
       lenis.raf(time * 1000);
-    });
+    }
+
+    gsap.ticker.add(update);
 
     gsap.ticker.lagSmoothing(0);
 
@@ -39,7 +48,8 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
+      gsap.ticker.remove(update);
+      window.lenisInstance = undefined;
     };
   }, []);
 
