@@ -61,10 +61,44 @@ type DestinationsTranslations = {
   items: DestinationItem[];
 };
 
+type EventItem = {
+  id: number;
+  destination: string;
+  date: string;
+  availableSeats: number;
+  totalSeats: number;
+  bookingDeadline: string; // ISO date string
+  price: string;
+  couplePrice: string;
+  bookingMoney: string;
+  inclusions: string[];
+  image: string;
+};
+
+type EventsTranslations = {
+  badge: string;
+  title: string;
+  titleAccent: string;
+  description: string;
+  bookNow: string;
+  seatsLeft: string;
+  bookingEnds: string;
+  days: string;
+  hours: string;
+  mins: string;
+  secs: string;
+  includes: string;
+  perPerson: string;
+  couplePackage: string;
+  bookingMoneyLabel: string;
+  items: EventItem[];
+};
+
 type TranslationSet = {
   nav: NavTranslations;
   hero: HeroTranslations;
   destinations: DestinationsTranslations;
+  events: EventsTranslations;
 };
 
 const translations: Record<Language, TranslationSet> = {
@@ -193,6 +227,64 @@ const translations: Record<Language, TranslationSet> = {
         },
       ],
     },
+    events: {
+      badge: "Don't Miss Out",
+      title: "Upcoming",
+      titleAccent: "Events",
+      description: "Join our community on these specially curated journeys. Limited seats available for each adventure.",
+      bookNow: "Book Your Seat",
+      seatsLeft: "Seats remaining",
+      bookingEnds: "Booking ends in",
+      days: "d",
+      hours: "h",
+      mins: "m",
+      secs: "s",
+      includes: "Package includes",
+      perPerson: "Per Person",
+      couplePackage: "Couple Package",
+      bookingMoneyLabel: "Booking Money",
+      items: [
+        {
+          id: 1,
+          destination: "Sajek Valley Cloud Expedition",
+          date: "April 15 - 18, 2026",
+          availableSeats: 8,
+          totalSeats: 24,
+          bookingDeadline: "2026-04-10T23:59:59Z",
+          price: "৳8,500",
+          couplePrice: "৳16,000",
+          bookingMoney: "৳3,000",
+          image: "/images/destinations/sajek.jpg",
+          inclusions: ["AC Transport", "Premium Resort", "All Meals", "Photo Session", "Professional Guide"]
+        },
+        {
+          id: 2,
+          destination: "Bandarban Peak Conquest",
+          date: "May 02 - 05, 2026",
+          availableSeats: 5,
+          totalSeats: 20,
+          bookingDeadline: "2026-04-25T23:59:59Z",
+          price: "৳9,200",
+          couplePrice: "৳17,500",
+          bookingMoney: "৳3,000",
+          image: "/images/destinations/bandarban.jpg",
+          inclusions: ["4x4 Jeep", "Hillside Cottage", "Traditional Food", "Trekking Gear", "Expert Guide"]
+        },
+        {
+          id: 3,
+          destination: "St. Martin Island Escape",
+          date: "May 20 - 23, 2026",
+          availableSeats: 12,
+          totalSeats: 30,
+          bookingDeadline: "2026-05-15T23:59:59Z",
+          price: "৳10,500",
+          couplePrice: "৳20,000",
+          bookingMoney: "৳3,000",
+          image: "/images/destinations/stmarting.jpg",
+          inclusions: ["Ship Tickets", "Beach View Hotel", "Seafood Dinner", "Scuba Diving", "Island Tour"]
+        }
+      ]
+    },
   },
   bn: {
     nav: {
@@ -313,6 +405,64 @@ const translations: Record<Language, TranslationSet> = {
           ],
         },
       ],
+    },
+    events: {
+      badge: "সুযোগ হারাবেন না",
+      title: "Upcoming",
+      titleAccent: "Events",
+      description: "আমাদের বিশেষভাবে কিউরেট করা এই যাত্রাগুলোতে যোগ দিন। প্রতিটি ভ্রমণে আসন সংখ্যা সীমিত।",
+      bookNow: "আপনার আসন বুক করুন",
+      seatsLeft: "আসন বাকি আছে",
+      bookingEnds: "বুকিং শেষ হতে বাকি",
+      days: "দিন",
+      hours: "ঘণ্টা",
+      mins: "মিনিট",
+      secs: "সেকেন্ড",
+      includes: "প্যাকেজে যা রয়েছে",
+      perPerson: "জনপ্রতি",
+      couplePackage: "কাপল প্যাকেজ",
+      bookingMoneyLabel: "বুকিং মানি",
+      items: [
+        {
+          id: 1,
+          destination: "সাজেক ভ্যালি মেঘের অভিযান",
+          date: "১৫ - ১৮ এপ্রিল, ২০২৬",
+          availableSeats: 8,
+          totalSeats: 24,
+          bookingDeadline: "2026-04-10T23:59:59Z",
+          price: "৳৮,৫০০",
+          couplePrice: "৳১৬,০০০",
+          bookingMoney: "৳৩,০০০",
+          image: "/images/destinations/sajek.jpg",
+          inclusions: ["এসি পরিবহন", "প্রিমিয়াম রিসোর্ট", "সকল খাবার", "ফটো সেশন", "প্রফেশনাল গাইড"]
+        },
+        {
+          id: 2,
+          destination: "বান্দরবান শিখর বিজয়",
+          date: "০২ - ০৫ মে, ২০২৬",
+          availableSeats: 5,
+          totalSeats: 20,
+          bookingDeadline: "2026-04-25T23:59:59Z",
+          price: "৳৯,২০০",
+          couplePrice: "৳১৭,৫০০",
+          bookingMoney: "৳৩,০০০",
+          image: "/images/destinations/bandarban.jpg",
+          inclusions: ["চাঁদের গাড়ি", "হিলসাইড কটেজ", "ঐতিহ্যবাহী খাবার", "ট্রেকিং গিয়ার", "দক্ষ গাইড"]
+        },
+        {
+          id: 3,
+          destination: "সেন্ট মার্টিন দ্বীপ ভ্রমণ",
+          date: "২০ - ২৩ মে, ২০২৬",
+          availableSeats: 12,
+          totalSeats: 30,
+          bookingDeadline: "2026-05-15T23:59:59Z",
+          price: "৳১০,৫০০",
+          couplePrice: "৳২০,০০০",
+          bookingMoney: "৳৩,০০০",
+          image: "/images/destinations/stmarting.jpg",
+          inclusions: ["শিপ টিকিট", "বিচ ভিউ হোটেল", "সীফুড ডিনার", "স্কুবা ডাইভিং", "আইল্যান্ড ট্যুর"]
+        }
+      ]
     },
   },
 };
