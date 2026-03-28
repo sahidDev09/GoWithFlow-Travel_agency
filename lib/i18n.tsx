@@ -112,11 +112,27 @@ type EventsTranslations = {
   items: EventItem[];
 };
 
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+type FAQTranslations = {
+  badge: string;
+  title: string;
+  titleAccent: string;
+  description: string;
+  footerText: string;
+  ctaText: string;
+  items: FAQItem[];
+};
+
 type TranslationSet = {
   nav: NavTranslations;
   hero: HeroTranslations;
   destinations: DestinationsTranslations;
   events: EventsTranslations;
+  faq: FAQTranslations;
   footer: {
     description: string;
     quickLinks: string;
@@ -339,6 +355,36 @@ const translations: Record<Language, TranslationSet> = {
         }
       ]
     },
+    faq: {
+      badge: "Common Questions",
+      title: "Frequently Asked",
+      titleAccent: "Questions",
+      description: "Everything you need to know about our tours and services. Can't find your answer? Our support team is always ready to help.",
+      footerText: "Still have more questions?",
+      ctaText: "Contact Support Team",
+      items: [
+        {
+          question: "What is the best time to visit Sylhet?",
+          answer: "The best time to visit Sylhet is from October to March when the weather is cool and pleasant. However, if you want to see the waterfalls and tea gardens at their lushest, the monsoon season (June to September) is also beautiful, though travel can be more challenging."
+        },
+        {
+          question: "Do you provide customized tour packages?",
+          answer: "Yes, we specialize in creating tailor-made itineraries based on your preferences, budget, and group size. Contact our team to discuss your dream trip to any destination in Bangladesh."
+        },
+        {
+          question: "What should I carry for a trek in Bandarban?",
+          answer: "We recommend carrying lightweight trekking shoes, a rain coat, personal medicine, a power bank, and a refillable water bottle. We provide a detailed packing list for every specific trip once you book."
+        },
+        {
+          question: "Are your trips family and couple friendly?",
+          answer: "Absolutely! We take pride in organizing safe and comfortable trips for families, couples, and solo female travelers. We select the best accommodations and maintain a professional environment throughout our journeys."
+        },
+        {
+          question: "How can I book a seat for an upcoming event?",
+          answer: "You can book directly through our website by selecting the event and clicking 'Book Now'. A minimum booking amount is required to confirm your seat, which can be paid via bKash or Bank Transfer."
+        }
+      ]
+    },
     footer: {
       description: "Sylhet's most trusted gateway to hidden wonders. We curate experiences that last a lifetime.",
       quickLinks: "Quick Links",
@@ -551,6 +597,36 @@ const translations: Record<Language, TranslationSet> = {
           bookingMoney: "৳৩,০০০",
           image: "/images/destinations/stmarting.jpg",
           inclusions: ["শিপ টিকিট", "বিচ ভিউ হোটেল", "সীফুড ডিনার", "স্কুবা ডাইভিং", "আইল্যান্ড ট্যুর"]
+        }
+      ]
+    },
+    faq: {
+      badge: "সাধারণ জিজ্ঞাসা",
+      title: "সচরাচর জিজ্ঞাসিত",
+      titleAccent: "প্রশ্নাবলী",
+      description: "আমাদের ট্যুর এবং পরিষেবাগুলো সম্পর্কে আপনার যা কিছু জানা প্রয়োজন। আপনার উত্তর খুঁজে পাচ্ছেন না? আমাদের সাপোর্ট টিম আপনাকে সাহায্য করতে সর্বদা প্রস্তুত।",
+      footerText: "আপনার কি আরও প্রশ্ন আছে?",
+      ctaText: "সাপোর্ট টিমের সাথে যোগাযোগ করুন",
+      items: [
+        {
+          question: "সিলেট ভ্রমণের উপযুক্ত সময় কোনটি?",
+          answer: "সিলেট ভ্রমণের সবচেয়ে উপযুক্ত সময় হলো অক্টোবর থেকে মার্চ, যখন আবহাওয়া মনোরম থাকে। তবে ঝর্ণা এবং চা বাগানের পূর্ণ রূপ দেখতে চাইলে বর্ষাকাল (জুন থেকে সেপ্টেম্বর) দারুণ, যদিও যাতায়াত কিছুটা কষ্টকর হতে পারে।"
+        },
+        {
+          question: "আপনারা কি কাস্টমাইজড ট্যুর প্যাকেজ প্রদান করেন?",
+          answer: "হ্যাঁ, আমরা আপনার পছন্দ, বাজেট এবং গ্রুপ মেম্বার অনুযায়ী কাস্টমাইজড ট্যুর প্ল্যান তৈরি করে থাকি। আপনার কাঙ্ক্ষিত ভ্রমণ নিয়ে আলোচনা করতে আমাদের টিমের সাথে যোগাযোগ করুন।"
+        },
+        {
+          question: "বান্দরবান ট্রেকিংয়ের জন্য সাথে কী কী রাখা উচিত?",
+          answer: "আমরা ভালো মানের ট্রেকিং জুতো, রেইনকোট, ব্যক্তিগত ওষুধ, পাওয়ার ব্যাংক এবং একটি পানির বোতল সাথে রাখার পরামর্শ দেই। বুকিং নিশ্চিত হওয়ার পর আমরা প্রতিটি ট্রিপের জন্য একটি বিস্তারিত প্যাকিং লিস্ট প্রদান করি।"
+        },
+        {
+          question: "আপনাদের ট্রিপগুলো কি ফ্যামিলি বা কাপল ফ্রেন্ডলি?",
+          answer: "অবশ্যই! পরিবার, দম্পতি এবং একক নারী ভ্রমণকারীদের জন্য আমরা নিরাপদ এবং আরামদায়ক ভ্রমণের নিশ্চয়তা দেই। আমরা মানসম্মত আবাসন এবং পেশাদার পরিবেশ বজায় রাখতে বদ্ধপরিকর।"
+        },
+        {
+          question: "আসন্ন কোনো ইভেন্টে কীভাবে আসন বুক করব?",
+          answer: "আপনি আমাদের ওয়েবসাইটের মাধ্যমে সরাসরি ইভেন্ট নির্বাচন করে 'বুক করুন' বাটনে ক্লিক করে বুকিং দিতে পারেন। আসন নিশ্চিত করতে একটি নির্দিষ্ট পরিমাণ 'বুকিং মানি' বিকাশ বা ব্যাংক ট্রান্সফারের মাধ্যমে জমা দিতে হবে।"
         }
       ]
     },

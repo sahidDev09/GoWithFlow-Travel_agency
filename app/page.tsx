@@ -5,6 +5,7 @@ import Gallery from "@/components/Gallery";
 import UpcomingEvents from "@/components/UpcomingEvents";
 import ExploreDestinations from "@/components/ExploreDestinations";
 import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <ExploreDestinations />
       <Gallery />
       <Testimonials />
+      <FAQ />
       <Footer />
     </main>
   );

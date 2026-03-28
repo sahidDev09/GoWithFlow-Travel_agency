@@ -100,13 +100,7 @@ const Gallery = () => {
       description: language === "en" ? "Seamless transitions from nature to city life." : "প্রকৃতি থেকে শহুরে জীবনের সহজ রূপান্তর।",
       className: "md:col-span-2 md:row-span-1"
     },
-    {
-      id: 5,
-      src: "https://images.unsplash.com/photo-1540611025311-01df3cef54b5",
-      title: language === "en" ? "River Life" : "নদীমাতৃক জীবন",
-      description: language === "en" ? "Experience the heart of Bangladesh on the water." : "জলের ওপর বাংলাদেশের প্রাণস্পন্দন অনুভব করুন।",
-      className: "md:col-span-1 md:row-span-2"
-    },
+    
     {
       id: 6,
       src: "https://images.unsplash.com/photo-1596402184320-417d7178b2cd",
