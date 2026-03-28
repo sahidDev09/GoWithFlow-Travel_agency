@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { useLanguage, EventItem } from "@/lib/i18n";
+import { BackgroundBeams } from "./ui/background-beams";
 
 // Import Swiper styles
 import "swiper/css";
@@ -112,7 +113,8 @@ const UpcomingEvents = () => {
   }, [isModalOpen, showSuccess]);
 
   return (
-    <section id="events" className="py-14 bg-slate-50 relative overflow-hidden">
+    <section id="events" className="py-4 bg-blue-50 relative overflow-hidden">
+      <BackgroundBeams className="opacity-60" />
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-indigo-500/5 blur-[120px] rounded-full -mr-20 -mt-20" />
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-500/5 blur-[120px] rounded-full -ml-20 -mb-20" />
@@ -123,7 +125,7 @@ const UpcomingEvents = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="px-4 py-1.5 rounded-full bg-indigo-50 text-indigo-600 text-sm font-bold tracking-wider uppercase mb-4 border border-indigo-100"
+            className="px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-md text-indigo-600 text-sm font-bold tracking-wider uppercase mb-4 border border-indigo-200"
           >
             {t.events.badge}
           </motion.span>
@@ -544,7 +546,7 @@ const UpcomingEvents = () => {
         .swiper-pagination-bullet-active {
           width: 24px;
           border-radius: 4px;
-          background: #4f46e5;
+          background: #6366f1;
         }
       `}</style>
     </section>

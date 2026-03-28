@@ -45,11 +45,14 @@ const Hero = () => {
         1.0
       );
 
-      tl.fromTo(buttonsRef.current, 
-        { y: 20, opacity: 0, scale: 0.95 }, 
-        { y: 0, opacity: 1, scale: 1, duration: 1, ease: "back.out(2)" }, 
-        1.2
-      );
+      const buttons = buttonsRef.current?.children;
+      if (buttons) {
+        tl.fromTo(buttons, 
+          { y: 30, opacity: 0, scale: 0.8 }, 
+          { y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.2, ease: "back.out(1.7)" }, 
+          1.2
+        );
+      }
 
       // 2. Scroll Animations for Balloons (Individual speeds)
       balloonRefs.current.forEach((balloon, i) => {
@@ -119,7 +122,7 @@ const Hero = () => {
             }}
           />
           {/* Contrast Mask: Lightens the area behind text */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_white_0%,_transparent_70%)] opacity-40 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#eff6ff_0%,_transparent_70%)] opacity-60 pointer-events-none" />
         </motion.div>
 
         {/* Floating Elements (USING IMAGES FROM PUBLIC/IMAGES/) */}
@@ -176,12 +179,12 @@ const Hero = () => {
         <div className="relative z-30 text-center max-w-5xl px-4 flex flex-col items-center space-y-10">
           <div className="space-y-4">
             <h1 className="text-5xl md:text-8xl font-black text-[#020617] drop-shadow-[0_10px_30px_rgba(255,255,255,1)] drop-shadow-[0_4px_10px_rgba(0,0,0,0.1)] uppercase flex flex-col items-center leading-none">
-              <span ref={titleRef} className="text-indigo-700 md:text-8xl text-5xl block">{t.hero.title}</span>
-              <span ref={subtitleRef} className="text-xl md:text-4xl font-extrabold text-slate-950 mt-2 block text-center leading-tight">{t.hero.subtitle}</span>
+              <span ref={titleRef} className="opacity-0 text-indigo-700 md:text-8xl text-5xl block">{t.hero.title}</span>
+              <span ref={subtitleRef} className="opacity-0 text-xl md:text-4xl font-extrabold text-slate-950 mt-2 block text-center leading-tight">{t.hero.subtitle}</span>
             </h1>
           </div>
 
-          <p ref={textRef} className="text-xl md:text-2xl text-slate-950 max-w-3xl mx-auto drop-shadow-[0_5px_15px_rgba(255,255,255,1)] drop-shadow-[0_2px_5px_rgba(0,0,0,0.05)] leading-relaxed antialiased font-medium">
+          <p ref={textRef} className="opacity-0 text-xl md:text-2xl text-slate-950 max-w-3xl mx-auto drop-shadow-[0_5px_15px_rgba(255,255,255,1)] drop-shadow-[0_2px_5px_rgba(0,0,0,0.05)] leading-relaxed antialiased font-medium">
             {t.hero.description}
           </p>
           
@@ -198,12 +201,12 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Foreground Layer: Cityscape */}
+        {/* Foreground Layer: Cityscape with Soft Edge Mask */}
         <motion.div 
           initial={{ y: 120, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-          className="absolute -bottom-10 left-0 w-full z-20 pointer-events-none"
+          className="absolute -bottom-10 left-0 w-full z-20 pointer-events-none [mask-image:linear-gradient(to_top,transparent_0%,black_15%,black_100%)]"
         >
           <Image 
             src="/landing travel.png"
@@ -214,21 +217,10 @@ const Hero = () => {
             priority
           />
         </motion.div>
-
-        {/* Transition Gradient */}
-        <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-white via-white/50 to-transparent z-15 pointer-events-none" />
-        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/30 to-transparent z-5 pointer-events-none" />
-
-        {/* Scroll indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.4 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center space-y-2"
-        >
-          <span className="text-[10px] font-black uppercase text-slate-900/60 font-sans">{t.hero.scrollDown}</span>
-          <div className="h-8 w-[1px] bg-slate-900/20" />
-        </motion.div>
+ 
+        {/* Transition Gradient Over Image for Seamless Blending */}
+        <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-blue-50 via-blue-50/80 to-transparent z-25 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-blue-50 to-transparent z-5 pointer-events-none" />
       </section>
     </div>
   );
