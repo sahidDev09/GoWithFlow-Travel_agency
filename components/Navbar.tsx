@@ -29,9 +29,9 @@ const Navbar = () => {
 
   const navLinks = [
     { name: t.nav.home, href: "/" },
-    { name: t.nav.events, href: "#" },
-    { name: t.nav.gallery, href: "#" },
-    { name: t.nav.about, href: "#" },
+    { name: t.nav.events, href: "/#events" },
+    { name: t.nav.gallery, href: "/gallery" },
+    { name: t.nav.about, href: "/#about" },
   ];
 
   return (
