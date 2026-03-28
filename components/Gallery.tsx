@@ -62,6 +62,7 @@ const BentoCard = ({ src, title, description, className }: { src: string; title:
         src={src}
         alt={title}
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover transition-transform duration-500 group-hover:scale-110"
       />
     </motion.div>
@@ -103,7 +104,7 @@ const Gallery = () => {
     
     {
       id: 6,
-      src: "https://images.unsplash.com/photo-1596402184320-417d7178b2cd",
+      src: "https://images.unsplash.com/photo-1500382017468-9049fed747ef",
       title: language === "en" ? "Golden Harvest" : "সোনালী ফসল",
       description: language === "en" ? "Beautiful rural landscapes and rich tea culture." : "চমৎকার গ্রামীণ দৃশ্য এবং সমৃদ্ধ চা সংস্কৃতি।",
       className: "md:col-span-1 md:row-span-1"
