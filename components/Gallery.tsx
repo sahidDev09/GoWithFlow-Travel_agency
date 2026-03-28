@@ -45,7 +45,7 @@ const BentoCard = ({ src, title, description, className }: { src: string; title:
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className={`relative h-full w-full rounded-[2rem] overflow-hidden group cursor-pointer ${className}`}
+      className={`relative h-full w-full min-h-[400px] md:min-h-0 rounded-[3rem] overflow-hidden group cursor-pointer ${className}`}
     >
       <div
         style={{
@@ -92,36 +92,36 @@ const Gallery = () => {
       src: "/images/gallery/keane_bridge.png",
       title: language === "en" ? "City Sunset" : "শহুরে সূর্যাস্ত",
       description: language === "en" ? "Golden hour at the iconic Keane Bridge." : "ঐতিহাসিক কিন ব্রিজে স্বর্ণালী গোধূলি।",
-      className: "md:col-span-1 md:row-span-1"
+      className: "hidden md:block md:col-span-1 md:row-span-1"
     },
     {
       id: 4,
       src: "/landing travel.png",
       title: language === "en" ? "Urban Escapes" : "নগর ভ্রমণ",
       description: language === "en" ? "Seamless transitions from nature to city life." : "প্রকৃতি থেকে শহুরে জীবনের সহজ রূপান্তর।",
-      className: "md:col-span-2 md:row-span-1"
+      className: "hidden md:block md:col-span-2 md:row-span-1"
     },
     
     {
       id: 6,
-      src: "https://images.unsplash.com/photo-1500382017468-9049fed747ef",
+      src: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=75",
       title: language === "en" ? "Golden Harvest" : "সোনালী ফসল",
       description: language === "en" ? "Beautiful rural landscapes and rich tea culture." : "চমৎকার গ্রামীণ দৃশ্য এবং সমৃদ্ধ চা সংস্কৃতি।",
-      className: "md:col-span-1 md:row-span-1"
+      className: "hidden md:block md:col-span-1 md:row-span-1"
     },
     {
       id: 7,
-      src: "https://images.unsplash.com/photo-1472396961693-142e6e269027",
+      src: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1200&q=75",
       title: language === "en" ? "Hidden Gems" : "লুকানো রত্ন",
       description: language === "en" ? "Discover the secret wonders of nature." : "প্রকৃতির গোপন বিস্ময়গুলো আবিষ্কার করুন।",
-      className: "md:col-span-1 md:row-span-1"
+      className: "hidden md:block md:col-span-1 md:row-span-1"
     },
     {
       id: 8,
-      src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+      src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=75",
       title: language === "en" ? "Mountain Peaks" : "পাহাড়ের চূড়া",
       description: language === "en" ? "Climb the highest points for a better view." : "সেরা দৃশ্যের জন্য সর্বোচ্চ শিখরে আরোহণ করুন।",
-      className: "md:col-span-1 md:row-span-1"
+      className: "hidden md:block md:col-span-1 md:row-span-1"
     }
   ];
 
@@ -147,7 +147,7 @@ const Gallery = () => {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 h-[800px]">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[800px]">
           {items.map((item) => (
             <BentoCard key={item.id} {...item} />
           ))}

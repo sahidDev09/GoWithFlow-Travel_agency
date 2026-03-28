@@ -165,7 +165,7 @@ const UpcomingEvents = () => {
               <SwiperSlide key={event.id}>
                 <div className="flex flex-col lg:flex-row min-h-[500px]">
                   {/* Image Section */}
-                  <div className="relative w-full lg:w-1/2 min-h-[300px] lg:min-h-full overflow-hidden rounded-t-3xl lg:rounded-tr-none lg:rounded-l-3xl">
+                  <div className="hidden lg:block relative w-full lg:w-1/2 min-h-[300px] lg:min-h-full overflow-hidden rounded-t-3xl lg:rounded-tr-none lg:rounded-l-3xl">
                     <Image
                       src={event.image}
                       alt={event.destination}
@@ -185,7 +185,7 @@ const UpcomingEvents = () => {
                   {/* Content Section */}
                   <div className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-between bg-white rounded-b-3xl lg:rounded-bl-none lg:rounded-r-3xl">
                     <div>
-                      <div className="flex items-center justify-between mb-6">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
                         <div className="flex items-center gap-2 text-slate-500 font-semibold">
                           <Calendar className="w-5 h-5 text-indigo-600" />
                           <span>{event.date}</span>
@@ -200,7 +200,7 @@ const UpcomingEvents = () => {
                         {event.destination}
                       </h3>
 
-                      <div className="grid grid-cols-2 gap-6 mb-8">
+                      <div className="flex flex-col sm:grid sm:grid-cols-2 gap-6 mb-8">
                         <div className="space-y-1">
                           <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-wider">
                             <Users className="w-3.5 h-3.5" />
@@ -260,7 +260,7 @@ const UpcomingEvents = () => {
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between gap-4">
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-6">
                         <div className="flex items-center gap-2">
                           <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100">
                             <TrendingUp className="w-5 h-5 text-emerald-600" />

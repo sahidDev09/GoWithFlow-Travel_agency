@@ -8,7 +8,6 @@ import { useLanguage } from "@/lib/i18n";
 const Navbar = () => {
   const { language, setLanguage, t } = useLanguage();
   const navRef = useRef<HTMLDivElement>(null);
-  const menuItemsRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -35,11 +34,13 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed top-8 left-0 w-full z-100 flex justify-center px-4 pointer-events-none">
+    <div className="fixed top-8 left-0 w-full z-[100] flex justify-center px-4 pointer-events-none">
       <nav
         ref={navRef}
-        className={`pointer-events-auto transition-all duration-500 ease-out flex items-center justify-between px-8 py-3 rounded-full border border-slate-200/50 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] glass ${
-          isScrolled ? "max-w-[950px] w-full py-4 bg-white/90 scale-95 shadow-indigo-500/5 border-slate-100" : "max-w-[850px] w-full bg-white/60"
+        className={`pointer-events-auto transition-all duration-500 ease-out flex items-center justify-between px-8 py-3 rounded-full border shadow-2xl backdrop-blur-xl backdrop-saturate-200 ${
+          isScrolled 
+            ? "max-w-[1000px] w-full py-4 bg-white/60 border-white/40 scale-[0.98] shadow-indigo-500/10" 
+            : "max-w-[850px] w-full bg-white/30 border-white/20"
         }`}
       >
         {/* Logo */}
@@ -50,19 +51,15 @@ const Navbar = () => {
           
         </Link>
 
-        {/* Menu Items */}
         <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link, index) => (
+          {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              ref={(el) => {
-                menuItemsRef.current[index] = el;
-              }}
-              className="relative text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors duration-300 group"
+              className="relative text-[13px] font-black uppercase tracking-widest text-slate-900/70 hover:text-indigo-600 transition-colors duration-300 group"
             >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full" />
+              <span className="relative z-10">{link.name}</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full opacity-60" />
             </Link>
           ))}
         </div>
@@ -89,9 +86,9 @@ const Navbar = () => {
           </div>
 
           {/* CTA Button */}
-          <button className="relative group overflow-hidden bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-xl transition-all hover:scale-105 active:scale-95">
+          <button className="relative group overflow-hidden bg-slate-950 text-white px-7 py-3 rounded-full text-[13px] font-black uppercase tracking-widest shadow-2xl transition-all hover:scale-105 active:scale-95">
             <span className="relative z-10">{t.nav.joinNow}</span>
-            <div className="absolute inset-0 bg-indigo-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+            <div className="absolute inset-0 bg-indigo-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
           </button>
         </div>
       </nav>

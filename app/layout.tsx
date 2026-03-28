@@ -33,7 +33,7 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", outfit.variable, plusJakartaSans.variable, "font-sans", geist.variable)}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-indigo-500/10">
+      <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-indigo-500/10" suppressHydrationWarning>
         <LanguageProvider>
           <SmoothScroll>
             {children}
