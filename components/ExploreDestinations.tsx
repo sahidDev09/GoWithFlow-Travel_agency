@@ -29,7 +29,7 @@ const destinationData = [
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/destinations/stmarting.jpg",
     categoryKey: "island" as const,
     gradient: "from-cyan-400 to-blue-500",
   },
