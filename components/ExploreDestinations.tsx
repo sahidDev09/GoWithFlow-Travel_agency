@@ -9,9 +9,30 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "@/lib/i18n";
+import DestinationModal from "./DestinationModal";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+}
+
+// Update the types for destination to include everything from DestinationItem in i18n
+interface Destination {
+  id: number;
+  image: string;
+  categoryKey: "mountains" | "beach" | "island" | "adventure" | "wildlife" | "valley";
+  gradient: string;
+  name: string;
+  description: string;
+  category: string;
+  fullDescription?: string;
+  gallery?: string[];
+  mustVisit?: { icon: string; name: string }[];
+  travelInfo?: {
+    bestTime: string;
+    location: string;
+    duration: string;
+    difficulty: string;
+  };
 }
 
 const destinationData = [
@@ -65,8 +86,12 @@ const ExploreDestinations = () => {
         ...data,
         name: translation?.name || "",
         description: translation?.description || "",
+        fullDescription: translation?.fullDescription,
+        gallery: translation?.gallery,
+        mustVisit: translation?.mustVisit,
+        travelInfo: translation?.travelInfo,
         category: t.destinations.categories[data.categoryKey],
-      };
+      } as Destination;
     });
   }, [t.destinations]);
 
@@ -89,6 +114,13 @@ const ExploreDestinations = () => {
   }, [emblaApi]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openDestination = (dest: Destination) => {
+    setSelectedDestination(dest);
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -196,6 +228,7 @@ const ExploreDestinations = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -10 }}
+                  onClick={() => openDestination(dest)}
                   className="group relative h-[500px] rounded-3xl overflow-hidden shadow-2xl shadow-indigo-500/5 cursor-pointer"
                 >
                   {/* Image Container */}
@@ -255,9 +288,13 @@ const ExploreDestinations = () => {
             />
           ))}
         </div>
-
-      
       </div>
+
+      <DestinationModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        destination={selectedDestination} 
+      />
     </section>
   );
 };
