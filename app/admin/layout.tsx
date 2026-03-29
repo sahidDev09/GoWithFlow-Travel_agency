@@ -132,7 +132,7 @@ export default function AdminLayout({
                 exit={{ opacity: 0, scale: 0.8 }}
                 className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-indigo-900/40 mx-auto"
               >
-                <Sparkles className="text-white" size={20} />
+                
               </motion.div>
             )}
           </AnimatePresence>
