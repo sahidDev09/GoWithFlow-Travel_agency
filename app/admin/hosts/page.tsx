@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { User, Shield, Briefcase, Mail, Phone, Calendar, MoreVertical, Search, Filter } from "lucide-react";
+import { Shield, Briefcase, Mail, Phone, MoreVertical, Search, Filter, Plus, UserCheck, UserX, Clock } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const staffData = [
   {
@@ -49,93 +50,122 @@ const staffData = [
 
 export default function HostsPage() {
   return (
-    <div className="space-y-8">
-      {/* Search & Filter */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" size={18} />
+    <div className="space-y-12">
+      {/* Header Actions */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-slate-200 dark:border-slate-800/50">
+        <div>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-black uppercase rounded-lg tracking-widest">Workspace</span>
+          </div>
+          <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Staff & Hosts</h1>
+          <p className="text-slate-500 font-medium mt-1">Manage your team permission and operational status.</p>
+        </div>
+        
+        <div className="flex items-center gap-3">
+          <motion.button 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex items-center px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black shadow-xl transition-all group"
+          >
+            <Plus size={20} className="mr-2" />
+            Add Employee
+          </motion.button>
+        </div>
+      </div>
+
+      {/* Control Bar */}
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="relative flex-1 max-w-xl">
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
           <input 
             type="text" 
-            placeholder="Search staff..." 
-            className="w-full pl-10 pr-4 py-3 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500 transition-all shadow-sm"
+            placeholder="Search by name, role or email..." 
+            className="w-full pl-14 pr-6 py-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[28px] outline-none focus:ring-2 focus:ring-indigo-500 transition-all shadow-sm font-medium"
           />
         </div>
         
-        <div className="flex items-center space-x-3">
-          <button className="flex items-center px-4 py-3 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all shadow-sm">
-            <Filter size={18} className="mr-2" />
+        <div className="flex items-center gap-3">
+          <button className="flex items-center px-6 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm font-bold">
+            <Filter size={18} className="mr-3" />
             Roles
           </button>
-          <button className="flex items-center px-4 py-3 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all shadow-sm">
-            <Shield size={18} className="mr-2 text-indigo-500" />
-            Manage Permissions
+          <button className="flex items-center px-6 py-4 bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-900/20 rounded-2xl text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 transition-all shadow-sm font-bold">
+            <Shield size={18} className="mr-3" />
+            Permissions
           </button>
         </div>
       </div>
 
-      {/* Staff Table */}
-      <div className="bg-white dark:bg-neutral-900 rounded-4xl border border-neutral-200 dark:border-neutral-800 overflow-hidden shadow-sm">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+      {/* Staff Table Card */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-white dark:bg-slate-900 rounded-[40px] border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm"
+      >
+        <div className="overflow-x-auto custom-scrollbar">
+          <table className="w-full text-left border-collapse min-w-[1000px]">
             <thead>
-              <tr className="bg-neutral-50/50 dark:bg-neutral-800/50 border-b border-neutral-200 dark:border-neutral-800">
-                <th className="px-6 py-5 text-sm font-semibold text-neutral-600 dark:text-neutral-400">Employee</th>
-                <th className="px-6 py-5 text-sm font-semibold text-neutral-600 dark:text-neutral-400">Position</th>
-                <th className="px-6 py-5 text-sm font-semibold text-neutral-600 dark:text-neutral-400">Contact</th>
-                <th className="px-6 py-5 text-sm font-semibold text-neutral-600 dark:text-neutral-400">Status</th>
-                <th className="px-6 py-5 text-sm font-semibold text-neutral-600 dark:text-neutral-400 text-right">Actions</th>
+              <tr className="bg-slate-50/50 dark:bg-slate-800/30 border-b border-slate-200 dark:border-slate-800">
+                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Employee Profile</th>
+                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Department & Role</th>
+                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Contact Details</th>
+                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Status</th>
+                <th className="px-10 py-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-right">Settings</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/50">
               {staffData.map((staff, idx) => (
                 <motion.tr 
                   key={staff.id}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="group hover:bg-neutral-50/50 dark:hover:bg-neutral-800/20 transition-all"
+                  transition={{ delay: 0.1 + idx * 0.05 }}
+                  className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-all cursor-pointer"
                 >
-                  <td className="px-6 py-5">
+                  <td className="px-10 py-6">
                     <div className="flex items-center">
-                      <div className="h-10 w-10 relative rounded-full overflow-hidden mr-3 ring-2 ring-indigo-50 dark:ring-indigo-900/20">
-                        <img src={staff.avatar} alt={staff.name} className="object-cover h-full w-full" />
+                      <div className="h-14 w-14 relative rounded-2xl overflow-hidden mr-5 shadow-md group-hover:scale-105 transition-transform duration-300 ring-2 ring-white dark:ring-slate-800">
+                        <Image src={staff.avatar} alt={staff.name} fill className="object-cover" />
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-neutral-900 dark:text-neutral-100">{staff.name}</div>
-                        <div className="text-xs text-neutral-500">Joined {staff.joinDate}</div>
+                        <div className="text-base font-black text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors">{staff.name}</div>
+                        <div className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-0.5 flex items-center gap-2">
+                           <Clock size={10} className="text-indigo-400" />
+                           Since {staff.joinDate}
+                        </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-5">
-                    <div className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
-                      <Briefcase size={14} className="mr-2 text-indigo-500" />
+                  <td className="px-10 py-6">
+                    <div className="inline-flex items-center px-4 py-2 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-xl text-xs font-black text-indigo-700 dark:text-indigo-300 gap-3">
+                      <Briefcase size={14} strokeWidth={2.5} />
                       {staff.role}
                     </div>
                   </td>
-                  <td className="px-6 py-5">
-                    <div className="flex flex-col space-y-1">
-                      <div className="flex items-center text-xs text-neutral-500">
-                        <Mail size={12} className="mr-2" />
+                  <td className="px-10 py-6">
+                    <div className="flex flex-col space-y-2">
+                      <div className="flex items-center text-sm font-bold text-slate-600 dark:text-slate-300">
+                        <Mail size={14} className="mr-3 text-slate-400" />
                         {staff.email}
                       </div>
-                      <div className="flex items-center text-xs text-neutral-500">
-                        <Phone size={12} className="mr-2" />
+                      <div className="flex items-center text-sm font-bold text-slate-600 dark:text-slate-300">
+                        <Phone size={14} className="mr-3 text-slate-400" />
                         {staff.phone}
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-5">
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold ${
-                      staff.status === "Active" ? "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400" :
-                      "bg-amber-100 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
+                  <td className="px-10 py-6">
+                    <span className={`inline-flex items-center px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-[0.1em] shadow-sm ${
+                      staff.status === "Active" ? "bg-emerald-500 text-white" :
+                      "bg-amber-500 text-white"
                     }`}>
-                      <div className={`w-1.5 h-1.5 rounded-full mr-2 ${staff.status === "Active" ? "bg-green-500" : "bg-amber-500"}`}></div>
+                      {staff.status === "Active" ? <UserCheck size={12} className="mr-2" /> : <UserX size={12} className="mr-2" />}
                       {staff.status}
                     </span>
                   </td>
-                  <td className="px-6 py-5 text-right">
-                    <button className="p-2 text-neutral-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 rounded-xl transition-all">
-                      <MoreVertical size={18} />
+                  <td className="px-10 py-6 text-right">
+                    <button className="p-3 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 rounded-2xl transition-all border border-transparent hover:border-indigo-100 dark:hover:border-slate-700">
+                      <MoreVertical size={20} />
                     </button>
                   </td>
                 </motion.tr>
@@ -143,14 +173,29 @@ export default function HostsPage() {
             </tbody>
           </table>
         </div>
-        <div className="px-6 py-4 bg-neutral-50/50 dark:bg-neutral-800/30 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
-          <p className="text-xs text-neutral-500 font-medium">Showing 4 of 24 staff members</p>
-          <div className="flex space-x-2">
-            <button className="px-3 py-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-xs font-semibold text-neutral-500 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all">Previous</button>
-            <button className="px-3 py-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-xs font-semibold text-neutral-500 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all">Next</button>
+        
+        {/* Pagination/Footer */}
+        <div className="px-10 py-8 bg-slate-50/50 dark:bg-slate-800/20 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div className="flex items-center gap-4 text-sm font-bold text-slate-400">
+             Showing <span className="text-slate-900 dark:text-white">1 - 4</span> of 24 members
+          </div>
+          <div className="flex items-center gap-2">
+            <button className="px-6 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-black text-slate-500 hover:text-indigo-600 transition-all shadow-sm disabled:opacity-50" disabled>
+              Previous
+            </button>
+            <div className="flex items-center gap-1">
+               {[1, 2, 3, 4].map(p => (
+                 <button key={p} className={`w-10 h-10 rounded-xl text-xs font-black transition-all ${p === 1 ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200" : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500"}`}>
+                   {p}
+                 </button>
+               ))}
+            </div>
+            <button className="px-6 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-black text-slate-500 hover:text-indigo-600 transition-all shadow-sm">
+              Next
+            </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

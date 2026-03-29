@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,9 +14,25 @@ declare global {
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
+  const isAdmin = pathname?.startsWith("/admin");
 
   useEffect(() => {
-    // Registger GSAP ScrollTrigger
+    if (isAdmin) {
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+        window.lenisInstance = undefined;
+      }
+      // Clean up Lenis classes and styles
+      document.documentElement.classList.remove("lenis", "lenis-smooth", "lenis-stopped", "lenis-scrolling");
+      document.body.classList.remove("lenis", "lenis-smooth", "lenis-stopped", "lenis-scrolling");
+      document.documentElement.style.scrollBehavior = "";
+      document.documentElement.removeAttribute('data-lenis-prevent');
+      return;
+    }
+
+    // Register GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
     // Initialize Lenis
@@ -51,7 +68,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       gsap.ticker.remove(update);
       window.lenisInstance = undefined;
     };
-  }, []);
+  }, [isAdmin]);
 
   return <>{children}</>;
 }

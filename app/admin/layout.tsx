@@ -38,14 +38,19 @@ export default function AdminLayout({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(scrollContainer.scrollTop > 20);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    
+    scrollContainer.addEventListener("scroll", handleScroll);
+    return () => scrollContainer.removeEventListener("scroll", handleScroll);
+  }, [pathname]);
 
   return (
     <div className="flex h-screen bg-[#F8FAFC] dark:bg-[#020617] overflow-hidden font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900/40">
@@ -72,9 +77,6 @@ export default function AdminLayout({
                 exit={{ opacity: 0, x: -20 }}
                 className="flex items-center gap-3"
               >
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-indigo-900/40">
-                  <Sparkles className="text-white" size={20} />
-                </div>
                 <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 tracking-tight">
                   GoWithFlow
                 </h1>
@@ -152,7 +154,7 @@ export default function AdminLayout({
       </motion.aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden relative z-10">
+      <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative z-10">
         {/* Top Navbar */}
         <header className={cn(
           "h-24 px-10 flex items-center justify-between z-40 transition-all duration-300 border-b border-transparent",
@@ -199,7 +201,11 @@ export default function AdminLayout({
         </header>
 
         {/* Dynamic Content */}
-        <div className="flex-1 overflow-y-auto p-10 custom-scrollbar">
+        <div 
+          ref={scrollContainerRef}
+          className="flex-1 overflow-y-auto p-10 custom-scrollbar admin-scroll-container" 
+          data-lenis-prevent
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={pathname}
