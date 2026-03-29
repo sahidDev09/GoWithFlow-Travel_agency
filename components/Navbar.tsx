@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { useLanguage } from "@/lib/i18n";
 
@@ -9,6 +10,7 @@ const Navbar = () => {
   const { language, setLanguage, t } = useLanguage();
   const navRef = useRef<HTMLDivElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,16 +54,26 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="relative text-[13px] font-black uppercase tracking-widest text-slate-900/70 hover:text-indigo-600 transition-colors duration-300 group"
-            >
-              <span className="relative z-10">{link.name}</span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full opacity-60" />
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = link.href === "/" 
+              ? pathname === "/" 
+              : pathname.startsWith(link.href);
+            
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative text-[13px] font-black uppercase tracking-widest transition-colors duration-300 group ${
+                  isActive ? "text-indigo-600" : "text-slate-900/70 hover:text-indigo-600"
+                }`}
+              >
+                <span className="relative z-10">{link.name}</span>
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-indigo-600 transition-all duration-300 opacity-60 ${
+                  isActive ? "w-full" : "w-0 group-hover:w-full"
+                }`} />
+              </Link>
+            );
+          })}
         </div>
 
         <div className="flex items-center space-x-4">

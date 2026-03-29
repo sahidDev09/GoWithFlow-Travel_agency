@@ -51,7 +51,7 @@ export default function FAQ() {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-24 overflow-hidden bg-white"
+      className="relative py-14 overflow-hidden bg-white"
       id="faq"
     >
       {/* Background Decorative Elements */}
