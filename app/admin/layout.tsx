@@ -16,8 +16,10 @@ import {
   Search,
   Sparkles,
   PanelLeftClose,
-  PanelLeftOpen
+  PanelLeftOpen,
+  Loader2
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -38,7 +40,34 @@ export default function AdminLayout({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("isAdminAuthenticated") === "true";
+    }
+    return null;
+  });
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Sync with localStorage on every navigation
+    const currentAuth = localStorage.getItem("isAdminAuthenticated") === "true";
+    
+    // Only update state if it has changed to avoid cascading renders
+    if (currentAuth !== isAuthenticated) {
+      setIsAuthenticated(currentAuth);
+    }
+
+    if (!currentAuth && pathname !== "/admin/login") {
+      router.push("/admin/login");
+    }
+  }, [isAuthenticated, pathname, router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAdminAuthenticated");
+    setIsAuthenticated(false);
+    router.push("/admin/login");
+  };
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -51,6 +80,20 @@ export default function AdminLayout({
     scrollContainer.addEventListener("scroll", handleScroll);
     return () => scrollContainer.removeEventListener("scroll", handleScroll);
   }, [pathname]);
+
+  // If the user is on the login page, just render children without the layout
+  if (pathname === "/admin/login") {
+    return <>{children}</>;
+  }
+
+  // If not authenticated, we're being redirected or still checking
+  if (isAuthenticated === null || !isAuthenticated) {
+    return (
+      <div className="h-screen w-full flex items-center justify-center bg-[#F8FAFC] dark:bg-[#020617]">
+        <Loader2 className="animate-spin text-indigo-500" size={32} />
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-[#F8FAFC] dark:bg-[#020617] overflow-hidden font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900/40">
@@ -146,7 +189,10 @@ export default function AdminLayout({
             <Settings size={22} className="group-hover:rotate-45 transition-transform duration-500" />
             {!isCollapsed && <span className="ml-4 font-medium">Settings</span>}
           </div>
-          <div className="flex items-center px-4 py-3.5 rounded-2xl text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/10 transition-all cursor-pointer group">
+          <div 
+            onClick={handleLogout}
+            className="flex items-center px-4 py-3.5 rounded-2xl text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/10 transition-all cursor-pointer group"
+          >
             <LogOut size={22} className="group-hover:-translate-x-1 transition-transform duration-300" />
             {!isCollapsed && <span className="ml-4 font-medium">Logout</span>}
           </div>
