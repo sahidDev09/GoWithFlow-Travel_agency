@@ -75,55 +75,55 @@ const Gallery = () => {
   const items = [
     {
       id: 1,
-      src: "/images/gallery/tea_garden.png",
-      title: language === "en" ? "Lush Tea Gardens" : "সবুজ চা বাগান",
-      description: language === "en" ? "Explore the rolling hills of Sylhet's famous tea estates." : "সিলেটের বিখ্যাত চা বাগানের সবুজ পাহাড় অন্বেষণ করুন।",
+      src: "https://i.postimg.cc/c44NQdGS/656400008-2937814809742072-419709997632154009-n.jpg",
+      title: language === "en" ? "Group Adventures" : "গ্রুপ অ্যাডভেঞ্চার",
+      description: language === "en" ? "Creating memories that last a lifetime." : "সারাজীবনের জন্য অমূল্য স্মৃতি তৈরি করা।",
       className: "md:col-span-2 md:row-span-2"
     },
     {
       id: 2,
-      src: "/images/gallery/jaflong.png",
-      title: language === "en" ? "Crystal Waters" : "স্বচ্ছ জলরাশি",
-      description: language === "en" ? "The stunning rocky riverbeds of Jaflong." : "জাফলংয়ের অসাধারণ পাথুরে নদী।",
+      src: "https://i.postimg.cc/yYQCj27J/656683194-2937814416408778-534490183140621319-n.jpg",
+      title: language === "en" ? "Scenic Views" : "মনোরম দৃশ্য",
+      description: language === "en" ? "Nature's beauty at its finest." : "প্রকৃতির অপরূপ সৌন্দর্য।",
       className: "md:col-span-1 md:row-span-1"
     },
     {
       id: 3,
-      src: "/images/gallery/keane_bridge.png",
-      title: language === "en" ? "City Sunset" : "শহুরে সূর্যাস্ত",
-      description: language === "en" ? "Golden hour at the iconic Keane Bridge." : "ঐতিহাসিক কিন ব্রিজে স্বর্ণালী গোধূলি।",
+      src: "https://i.postimg.cc/yYQCj27m/660526147-3367469703415514-868498680945280906-n.jpg",
+      title: language === "en" ? "Travel Moments" : "ভ্রমণের মুহূর্ত",
+      description: language === "en" ? "Capturing the essence of exploration." : "অন্বেষণের মূল নির্যাস ধারণ করা।",
       className: "hidden md:block md:col-span-1 md:row-span-1"
     },
     {
       id: 4,
-      src: "/landing travel.png",
-      title: language === "en" ? "Urban Escapes" : "নগর ভ্রমণ",
-      description: language === "en" ? "Seamless transitions from nature to city life." : "প্রকৃতি থেকে শহুরে জীবনের সহজ রূপান্তর।",
+      src: "https://i.postimg.cc/ZK7zHXJv/g1.jpg",
+      title: language === "en" ? "Local Culture" : "স্থানীয় সংস্কৃতি",
+      description: language === "en" ? "Immerse yourself in authentic experiences." : "প্রকৃত অভিজ্ঞতায় নিজেকে নিমজ্জিত করুন।",
       className: "hidden md:block md:col-span-2 md:row-span-1"
     },
-    
     {
       id: 6,
-      src: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=75",
-      title: language === "en" ? "Golden Harvest" : "সোনালী ফসল",
-      description: language === "en" ? "Beautiful rural landscapes and rich tea culture." : "চমৎকার গ্রামীণ দৃশ্য এবং সমৃদ্ধ চা সংস্কৃতি।",
+      src: "https://i.postimg.cc/CLPp79wk/g2.jpg",
+      title: language === "en" ? "Exploration" : "অন্বেষণ",
+      description: language === "en" ? "Finding beauty in every corner." : "প্রতিটি কোণে সৌন্দর্য খুঁজে পাওয়া।",
       className: "hidden md:block md:col-span-1 md:row-span-1"
     },
     {
       id: 7,
-      src: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1200&q=75",
-      title: language === "en" ? "Hidden Gems" : "লুকানো রত্ন",
-      description: language === "en" ? "Discover the secret wonders of nature." : "প্রকৃতির গোপন বিস্ময়গুলো আবিষ্কার করুন।",
+      src: "https://i.postimg.cc/RZW5DG0H/g3.jpg",
+      title: language === "en" ? "Nature Escapes" : "প্রকৃতিতে পলায়ন",
+      description: language === "en" ? "Breathe in the fresh mountain air." : "পাহাড়ের টাটকা বাতাসে শ্বাস নিন।",
       className: "hidden md:block md:col-span-1 md:row-span-1"
     },
     {
       id: 8,
-      src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=75",
+      src: "https://i.postimg.cc/nhXbPTLB/g4.jpg",
       title: language === "en" ? "Mountain Peaks" : "পাহাড়ের চূড়া",
-      description: language === "en" ? "Climb the highest points for a better view." : "সেরা দৃশ্যের জন্য সর্বোচ্চ শিখরে আরোহণ করুন।",
+      description: language === "en" ? "Climb higher for the best perspective." : "সেরা দৃষ্টিভঙ্গির জন্য আরও উঁচুতে আরোহণ করুন।",
       className: "hidden md:block md:col-span-1 md:row-span-1"
     }
   ];
+
 
   return (
     <section className="py-14 bg-blue-50/30">

@@ -7,7 +7,6 @@ import {
   Lock, 
   Mail, 
   ArrowRight, 
-  Sparkles, 
   Loader2, 
   ShieldCheck, 
   Eye, 

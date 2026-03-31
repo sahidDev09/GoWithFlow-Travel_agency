@@ -6,13 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const galleryData = [
-  { id: 1, title: "Grand Canyon", size: "2.4 MB", category: "Nature", location: "Arizona, USA", date: "Oct 2024", url: "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&q=80" },
-  { id: 2, title: "Santorini Sunset", size: "1.8 MB", category: "Travel", location: "Oia, Greece", date: "Sep 2024", url: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&q=80" },
-  { id: 3, title: "Swiss Alps", size: "3.1 MB", category: "Mountain", location: "Zermatt, Switzerland", date: "Aug 2024", url: "https://images.unsplash.com/photo-1506905952044-88461c282672?auto=format&fit=crop&q=80" },
-  { id: 4, title: "Kyoto Temple", size: "2.7 MB", category: "Culture", location: "Kyoto, Japan", date: "Nov 2024", url: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80" },
-  { id: 5, title: "Sahara Desert", size: "2.1 MB", category: "Desert", location: "Merzouga, Morocco", date: "Dec 2024", url: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&q=80" },
-  { id: 6, title: "Iceland Aurora", size: "4.2 MB", category: "Nature", location: "Reykjavik, Iceland", date: "Jan 2025", url: "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&fit=crop&q=80" },
+  { id: 1, title: "Group Tour", size: "1.2 MB", category: "Travel", location: "Sylhet, BD", date: "Mar 2024", url: "https://i.postimg.cc/c44NQdGS/656400008-2937814809742072-419709997632154009-n.jpg" },
+  { id: 2, title: "Scenic Valley", size: "2.1 MB", category: "Nature", location: "Jaflong, BD", date: "Feb 2024", url: "https://i.postimg.cc/yYQCj27J/656683194-2937814416408778-534490183140621319-n.jpg" },
+  { id: 3, title: "Crystal River", size: "1.5 MB", category: "Nature", location: "Lalakhal, BD", date: "Jan 2024", url: "https://i.postimg.cc/yYQCj27m/660526147-3367469703415514-868498680945280906-n.jpg" },
+  { id: 4, title: "Chairman's Meet", size: "0.8 MB", category: "Culture", location: "Office, BD", date: "Apr 2024", url: "https://i.postimg.cc/5N7WgDfV/chairman.jpg" },
+  { id: 5, title: "Tea Estate", size: "3.4 MB", category: "Mountain", location: "Srimangal, BD", date: "Dec 2023", url: "https://i.postimg.cc/ZK7zHXJv/g1.jpg" },
+  { id: 6, title: "Waterfall", size: "2.8 MB", category: "Nature", location: "Madhabkunda, BD", date: "Nov 2023", url: "https://i.postimg.cc/CLPp79wk/g2.jpg" },
 ];
+
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("All");
