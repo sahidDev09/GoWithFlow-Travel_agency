@@ -192,7 +192,7 @@ const translations: Record<Language, TranslationSet> = {
       joinNow: "Book Now",
     },
     hero: {
-      title: "Travel trip of sylhet",
+      title: "Travel Trip",
       subtitle: "Sylhet's Most Trusted Gateway to Hidden Wonders",
       description: "From lush tea gardens to cascading waterfalls, explore the true essence of Sylhet with the region's most trusted tour experts.",
       bookEscape: "Book Escape",
@@ -470,7 +470,7 @@ const translations: Record<Language, TranslationSet> = {
       joinNow: "বুক করুন",
     },
     hero: {
-      title: "Travel trip of sylhet",
+      title: "Travel Trip",
       subtitle: "লুকানো বিস্ময়ের সন্ধানে সিলেটের সবচেয়ে নির্ভরযোগ্য প্রবেশদ্বার",
       description: "সবুজ চা বাগান থেকে শুরু করে ঝর্ণার কলতান পর্যন্ত, এই অঞ্চলের সবচেয়ে বিশ্বস্ত ট্যুর বিশেষজ্ঞদের সাথে সিলেটের আসল রূপটি অন্বেষণ করুন।",
       bookEscape: "বুকিং দিন",
