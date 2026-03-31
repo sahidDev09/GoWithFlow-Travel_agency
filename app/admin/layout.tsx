@@ -14,7 +14,6 @@ import {
   Settings,
   Bell,
   Search,
-  Sparkles,
   PanelLeftClose,
   PanelLeftOpen,
   Loader2
@@ -22,6 +21,7 @@ import {
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const sidebarItems = [
   { name: "Dashboard", icon: LayoutDashboard, href: "/admin" },
@@ -41,27 +41,19 @@ export default function AdminLayout({
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("isAdminAuthenticated") === "true";
-    }
-    return null;
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Sync with localStorage on every navigation
-    const currentAuth = localStorage.getItem("isAdminAuthenticated") === "true";
-    
-    // Only update state if it has changed to avoid cascading renders
-    if (currentAuth !== isAuthenticated) {
-      setIsAuthenticated(currentAuth);
+    const auth = localStorage.getItem("isAdminAuthenticated") === "true";
+    if (isAuthenticated === null) {
+      setIsAuthenticated(auth);
     }
-
-    if (!currentAuth && pathname !== "/admin/login") {
+    
+    if (!auth && pathname !== "/admin/login") {
       router.push("/admin/login");
     }
-  }, [isAuthenticated, pathname, router]);
+  }, [pathname, router]);
 
   const handleLogout = () => {
     localStorage.removeItem("isAdminAuthenticated");
@@ -81,18 +73,20 @@ export default function AdminLayout({
     return () => scrollContainer.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
-  // If the user is on the login page, just render children without the layout
   if (pathname === "/admin/login") {
     return <>{children}</>;
   }
 
-  // If not authenticated, we're being redirected or still checking
-  if (isAuthenticated === null || !isAuthenticated) {
+  if (isAuthenticated === null) {
     return (
       <div className="h-screen w-full flex items-center justify-center bg-[#F8FAFC] dark:bg-[#020617]">
         <Loader2 className="animate-spin text-indigo-500" size={32} />
       </div>
     );
+  }
+
+  if (!isAuthenticated && pathname !== "/admin/login") {
+     return null; // Redirecting
   }
 
   return (
@@ -132,9 +126,11 @@ export default function AdminLayout({
                 exit={{ opacity: 0, scale: 0.8 }}
                 className="w-10 h-10 rounded-2xl overflow-hidden shadow-lg shadow-indigo-200 dark:shadow-indigo-900/40 mx-auto"
               >
-                <img 
+                <Image 
                   src="/travelaidlogo-2.png" 
                   alt="Logo" 
+                  width={40}
+                  height={40}
                   className="w-full h-full object-cover"
                 />
               </motion.div>
@@ -204,7 +200,7 @@ export default function AdminLayout({
       </motion.aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative z-10">
+      <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
         {/* Top Navbar */}
         <header className={cn(
           "h-24 px-10 flex items-center justify-between z-40 transition-all duration-300 border-b border-transparent",

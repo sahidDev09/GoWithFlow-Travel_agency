@@ -8,48 +8,17 @@ import {
   PieChart, Pie, Cell 
 } from "recharts";
 import { 
-  Users, 
-  Calendar, 
   TrendingUp, 
-  Wallet, 
   ArrowUpRight, 
   ArrowDownRight,
   UserPlus,
-  Compass,
   ArrowRight,
   MoreVertical,
   Activity
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-const dashboardData = {
-  stats: [
-    { title: "Total Travelers", value: "12,482", icon: Users, change: "+12.5%", isPositive: true, color: "indigo" },
-    { title: "Upcoming Events", value: "24", icon: Calendar, change: "+3.2%", isPositive: true, color: "blue" },
-    { title: "Revenue", value: "20,986,350 ৳", icon: Wallet, change: "+8.7%", isPositive: true, color: "emerald" },
-    { title: "New Bookings", value: "312", icon: Compass, change: "-2.1%", isPositive: false, color: "rose" },
-  ],
-  monthlyTravelers: [
-    { month: "Jan", count: 1200, revenue: 45000 },
-    { month: "Feb", count: 1560, revenue: 52000 },
-    { month: "Mar", count: 1890, revenue: 61000 },
-    { month: "Apr", count: 2100, revenue: 68000 },
-    { month: "May", count: 2450, revenue: 75000 },
-    { month: "Jun", count: 3200, revenue: 92000 },
-  ],
-  revenueByRegion: [
-    { name: "Europe", value: 45, color: "#6366f1" },
-    { name: "Asia", value: 30, color: "#3b82f6" },
-    { name: "Americas", value: 15, color: "#10b981" },
-    { name: "Others", value: 10, color: "#f43f5e" },
-  ],
-  recentTravelers: [
-    { name: "John Doe", email: "john@example.com", region: "Europe", status: "Active", amount: "138,000 ৳" },
-    { name: "Jane Smith", email: "jane@example.com", region: "Asia", status: "Active", amount: "396,750 ৳" },
-    { name: "Michael Ross", email: "michael@example.com", region: "America", status: "Pending", amount: "102,350 ৳" },
-    { name: "Sarah Connor", email: "sarah@example.com", region: "Europe", status: "Active", amount: "241,500 ৳" },
-  ]
-};
+import { dashboardData } from "@/lib/admin-data";
 
 
 
