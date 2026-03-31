@@ -50,10 +50,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand & Description */}
           <div className="space-y-6">
-            <Link href="/" className="inline-block">
-              <span className="text-3xl font-black text-white tracking-tighter">
-                GoWith<span className="text-indigo-500">Flow</span>
-              </span>
+            <Link href="/" className="inline-block group">
+              <div className="flex items-center gap-3">
+                <img 
+                  src="/travelaidlogo-2.png" 
+                  alt="Travel Aid Logo" 
+                  className="h-12 w-auto object-contain"
+                />
+                <span className="text-2xl font-black text-white tracking-tighter group-hover:text-indigo-400 transition-colors">
+                  Travel <span className="text-indigo-500">Aid</span>
+                </span>
+              </div>
             </Link>
             <p className="text-slate-400 leading-relaxed max-w-sm">
               {t.footer.description}
@@ -151,7 +158,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-10 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-sm text-slate-500">
-            © {currentYear} GoWithFlow Travel Agency. {t.footer.rights}
+            © {currentYear} Travel Aid. {t.footer.rights}
           </p>
           <div className="flex items-center gap-8">
             {legalLinks.map((link, index) => (

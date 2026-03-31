@@ -121,7 +121,7 @@ export default function AdminLayout({
                 className="flex items-center gap-3"
               >
                 <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 tracking-tight">
-                  GoWithFlow
+                  Travel Aid of sylhet
                 </h1>
               </motion.div>
             ) : (
@@ -130,9 +130,13 @@ export default function AdminLayout({
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
-                className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-indigo-900/40 mx-auto"
+                className="w-10 h-10 rounded-2xl overflow-hidden shadow-lg shadow-indigo-200 dark:shadow-indigo-900/40 mx-auto"
               >
-                
+                <img 
+                  src="/travelaidlogo-2.png" 
+                  alt="Logo" 
+                  className="w-full h-full object-cover"
+                />
               </motion.div>
             )}
           </AnimatePresence>

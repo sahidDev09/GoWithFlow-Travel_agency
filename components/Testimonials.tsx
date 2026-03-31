@@ -13,8 +13,8 @@ const Testimonials = () => {
       name: "Tanvir Ahmed",
       location: "Sylhet, BD",
       text: language === "en" 
-        ? "GoWithFlow made my visit to the tea gardens of Sylhet absolutely magical. The planning was seamless!"
-        : "GoWithFlow আমার সিলেট চা বাগান ভ্রমণকে একেবারে জাদুকরী করে তুলেছে। তাদের পরিকল্পনা ছিল অসাধারণ!",
+        ? "Travel Aid made my visit to the tea gardens of Sylhet absolutely magical. The planning was seamless!"
+        : "ট্রাভেল এইড আমার সিলেট চা বাগান ভ্রমণকে একেবারে জাদুকরী করে তুলেছে। তাদের পরিকল্পনা ছিল অসাধারণ!",
       rating: 5,
       rotation: -2,
     },

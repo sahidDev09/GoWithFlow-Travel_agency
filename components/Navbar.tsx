@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { useLanguage } from "@/lib/i18n";
+import Image from "next/image";
 
 const Navbar = () => {
   const { language, setLanguage, t } = useLanguage();
@@ -47,10 +48,13 @@ const Navbar = () => {
       >
         {/* Logo */}
         <Link href="/" className="group flex items-center space-x-2">
-          <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg group-hover:bg-indigo-500 transition-colors">
-            TA
-          </div>
-          
+          <Image 
+            src="/travelaidlogo-2.png" 
+            alt="Travel Aid Logo" 
+            height={100}
+            width={100}
+            className="h-10 w-auto object-contain"
+          />
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">

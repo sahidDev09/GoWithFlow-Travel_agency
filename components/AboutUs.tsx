@@ -88,10 +88,10 @@ const AboutUs = () => {
             className="md:row-span-2 group relative overflow-hidden rounded-[2.5rem] bg-indigo-900 shadow-2xl"
           >
             <Image
-              src="/images/chairman.png"
+              src="https://i.postimg.cc/5N7WgDfV/chairman.jpg"
               alt="Chairman"
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-80"
+              className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-100"
               sizes="(max-width: 768px) 100vw, 33vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/90 via-indigo-950/20 to-transparent" />
@@ -210,7 +210,7 @@ const AboutUs = () => {
           >
             <div>
                 <h2 className="text-4xl font-black text-slate-900 mb-4">Visit Our Office</h2>
-                <p className="text-slate-500 font-medium mb-8">Located at the heart of Zindabazar, we welcome you to drop by and discuss your travel dreams.</p>
+                <p className="text-slate-500 font-medium mb-8">Located at Subanighat road, we welcome you to drop by and discuss your travel dreams.</p>
                 
                 <div className="space-y-4">
                     <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-transparent hover:border-indigo-100 hover:bg-white transition-all">
@@ -219,7 +219,7 @@ const AboutUs = () => {
                         </div>
                         <div>
                             <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Address</p>
-                            <p className="text-slate-700 font-bold">Zindabazar, Sylhet 3100, Bangladesh</p>
+                            <p className="text-slate-700 font-bold">{t.footer.address}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-transparent hover:border-indigo-100 hover:bg-white transition-all">
@@ -228,7 +228,7 @@ const AboutUs = () => {
                         </div>
                         <div>
                             <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Phone</p>
-                            <p className="text-slate-700 font-bold">+880 1700-000000</p>
+                            <p className="text-slate-700 font-bold">{t.footer.phone}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-transparent hover:border-indigo-100 hover:bg-white transition-all">
@@ -237,7 +237,7 @@ const AboutUs = () => {
                         </div>
                         <div>
                             <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Email</p>
-                            <p className="text-slate-700 font-bold">sahid@gmail.com</p>
+                            <p className="text-slate-700 font-bold">{t.footer.email}</p>
                         </div>
                     </div>
                 </div>
@@ -245,7 +245,7 @@ const AboutUs = () => {
             
             <div className="h-[400px] w-full rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-2xl relative grayscale hover:grayscale-0 transition-all duration-500 shadow-indigo-100/50">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14470.364491953254!2d91.85966455!3d24.89492985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375054d3dce09c3f%3A0x2f6050543e9fdcc5!2sZinda%20Bazar%2C%20Sylhet!5e0!3m2!1sen!2sbd!4v1711654483921!5m2!1sen!2sbd" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14470.364491953254!2d91.8767626!3d24.8893827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751aba531882baf%3A0xb82dcf50a04a75e9!2sTravel%20aid%20of%20Sylhet!5e0!3m2!1sen!2sbd!4v1711654483921!5m2!1sen!2sbd" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 

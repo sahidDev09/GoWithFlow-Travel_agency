@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import AboutUs from "@/components/AboutUs";
 
 export const metadata = {
-  title: "About Us | GoWithFlow",
-  description: "Learn more about GoWithFlow, our story, mission, vision, and the team leading the way in luxury travel experiences.",
+  title: "About Us | Travel Aid",
+  description: "Learn more about Travel Aid, our story, mission, vision, and the team leading the way in luxury travel experiences.",
 };
 
 export default function AboutPage() {

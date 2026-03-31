@@ -18,8 +18,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "GoWithFlow | Modern Travel Guide Agency",
-  description: "Discover hidden destinations, expert local guides, and unforgettable journeys with GoWithFlow.",
+  title: "Travel Aid | Modern Travel Guide Agency",
+  description: "Discover hidden destinations, expert local guides, and unforgettable journeys with Travel Aid.",
 };
 
 export default function RootLayout({
