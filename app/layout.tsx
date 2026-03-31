@@ -18,8 +18,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Travel Aid | Modern Travel Guide Agency",
-  description: "Discover hidden destinations, expert local guides, and unforgettable journeys with Travel Aid.",
+  title: "Travel trip of sylhet | Modern Travel Guide Agency",
+  description: "Discover hidden destinations, expert local guides, and unforgettable journeys with Travel trip of sylhet.",
 };
 
 export default function RootLayout({

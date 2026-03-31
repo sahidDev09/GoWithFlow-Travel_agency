@@ -88,7 +88,7 @@ const AboutUs = () => {
             className="md:row-span-2 group relative overflow-hidden rounded-[2.5rem] bg-indigo-900 shadow-2xl"
           >
             <Image
-              src="https://i.postimg.cc/5N7WgDfV/chairman.jpg"
+              src="https://i.postimg.cc/KcsZn4Gv/IMG-0907.jpg"
               alt="Chairman"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-100"
@@ -245,7 +245,7 @@ const AboutUs = () => {
             
             <div className="h-[400px] w-full rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-2xl relative grayscale hover:grayscale-0 transition-all duration-500 shadow-indigo-100/50">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14470.364491953254!2d91.8767626!3d24.8893827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751aba531882baf%3A0xb82dcf50a04a75e9!2sTravel%20aid%20of%20Sylhet!5e0!3m2!1sen!2sbd!4v1711654483921!5m2!1sen!2sbd" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.201047775653!2d91.87541357559837!3d24.891122977909312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375055005efd5025%3A0xf7ab99440cf045ed!2sTravel%20Trip%20of%20Sylhet!5e0!3m2!1sen!2sbd!4v1774982105004!5m2!1sen!2sbd" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 

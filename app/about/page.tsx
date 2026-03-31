@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import AboutUs from "@/components/AboutUs";
 
 export const metadata = {
-  title: "About Us | Travel Aid",
-  description: "Learn more about Travel Aid, our story, mission, vision, and the team leading the way in luxury travel experiences.",
+  title: "About Us | Travel trip of sylhet",
+  description: "Learn more about Travel trip of sylhet, our story, mission, vision, and the team leading the way in luxury travel experiences.",
 };
 
 export default function AboutPage() {

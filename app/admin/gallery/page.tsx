@@ -6,12 +6,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const galleryData = [
-  { id: 1, title: "Group Tour", size: "1.2 MB", category: "Travel", location: "Sylhet, BD", date: "Mar 2024", url: "https://i.postimg.cc/c44NQdGS/656400008-2937814809742072-419709997632154009-n.jpg" },
-  { id: 2, title: "Scenic Valley", size: "2.1 MB", category: "Nature", location: "Jaflong, BD", date: "Feb 2024", url: "https://i.postimg.cc/yYQCj27J/656683194-2937814416408778-534490183140621319-n.jpg" },
-  { id: 3, title: "Crystal River", size: "1.5 MB", category: "Nature", location: "Lalakhal, BD", date: "Jan 2024", url: "https://i.postimg.cc/yYQCj27m/660526147-3367469703415514-868498680945280906-n.jpg" },
-  { id: 4, title: "Chairman's Meet", size: "0.8 MB", category: "Culture", location: "Office, BD", date: "Apr 2024", url: "https://i.postimg.cc/5N7WgDfV/chairman.jpg" },
-  { id: 5, title: "Tea Estate", size: "3.4 MB", category: "Mountain", location: "Srimangal, BD", date: "Dec 2023", url: "https://i.postimg.cc/ZK7zHXJv/g1.jpg" },
-  { id: 6, title: "Waterfall", size: "2.8 MB", category: "Nature", location: "Madhabkunda, BD", date: "Nov 2023", url: "https://i.postimg.cc/CLPp79wk/g2.jpg" },
+  { id: 1, title: "Group Tour", size: "1.2 MB", category: "Travel", location: "Sylhet, BD", date: "Mar 2024", url: "https://i.postimg.cc/gjK2WK9v/ts1.jpg" },
+  { id: 2, title: "Scenic Valley", size: "2.1 MB", category: "Nature", location: "Jaflong, BD", date: "Feb 2024", url: "https://i.postimg.cc/jdsjhBNM/ts10.jpg" },
+  { id: 3, title: "Crystal River", size: "1.5 MB", category: "Nature", location: "Lalakhal, BD", date: "Jan 2024", url: "https://i.postimg.cc/wT6BknJW/ts11.jpg" },
+  { id: 4, title: "Chairman's Meet", size: "0.8 MB", category: "Culture", location: "Office, BD", date: "Apr 2024", url: "/images/chairman.png" },
+  { id: 5, title: "Tea Estate", size: "3.4 MB", category: "Mountain", location: "Srimangal, BD", date: "Dec 2023", url: "https://i.postimg.cc/qMjvDQX5/ts12.jpg" },
+  { id: 6, title: "Waterfall", size: "2.8 MB", category: "Nature", location: "Madhabkunda, BD", date: "Nov 2023", url: "https://i.postimg.cc/Pr25VKQG/ts13.jpg" },
 ];
 
 

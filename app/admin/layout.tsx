@@ -115,7 +115,7 @@ export default function AdminLayout({
                 className="flex items-center gap-3"
               >
                 <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 tracking-tight">
-                  Travel Aid of sylhet
+                  Travel trip of sylhet
                 </h1>
               </motion.div>
             ) : (
@@ -127,7 +127,7 @@ export default function AdminLayout({
                 className="w-10 h-10 rounded-2xl overflow-hidden shadow-lg shadow-indigo-200 dark:shadow-indigo-900/40 mx-auto"
               >
                 <Image 
-                  src="/travelaidlogo-2.png" 
+                  src="/traveltrip.png" 
                   alt="Logo" 
                   width={40}
                   height={40}

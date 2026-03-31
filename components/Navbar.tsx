@@ -49,8 +49,8 @@ const Navbar = () => {
         {/* Logo */}
         <Link href="/" className="group flex items-center space-x-2">
           <Image 
-            src="/travelaidlogo-2.png" 
-            alt="Travel Aid Logo" 
+            src="/traveltrip.png" 
+            alt="Travel trip of sylhet Logo" 
             height={100}
             width={100}
             className="h-10 w-auto object-contain"

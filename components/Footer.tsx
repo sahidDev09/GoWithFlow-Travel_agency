@@ -53,12 +53,12 @@ const Footer = () => {
             <Link href="/" className="inline-block group">
               <div className="flex items-center gap-3">
                 <img 
-                  src="/travelaidlogo-2.png" 
-                  alt="Travel Aid Logo" 
+                  src="/traveltrip.png" 
+                  alt="Travel trip of sylhet Logo" 
                   className="h-12 w-auto object-contain"
                 />
                 <span className="text-2xl font-black text-white tracking-tighter group-hover:text-indigo-400 transition-colors">
-                  Travel <span className="text-indigo-500">Aid</span>
+                  Travel <span className="text-indigo-500">trip of sylhet</span>
                 </span>
               </div>
             </Link>
@@ -158,7 +158,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-10 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-sm text-slate-500">
-            © {currentYear} Travel Aid. {t.footer.rights}
+            © {currentYear} Travel trip of sylhet. {t.footer.rights}
           </p>
           <div className="flex items-center gap-8">
             {legalLinks.map((link, index) => (

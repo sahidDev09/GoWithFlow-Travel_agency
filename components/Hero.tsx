@@ -210,7 +210,7 @@ const Hero = () => {
         >
           <Image 
             src="/landing travel.png"
-            alt="Travel Aid Cityscape"
+            alt="Travel trip of sylhet Cityscape"
             width={1920}
             height={1080}
             className="w-full h-auto object-cover"

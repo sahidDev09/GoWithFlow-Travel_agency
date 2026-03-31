@@ -75,49 +75,49 @@ const Gallery = () => {
   const items = [
     {
       id: 1,
-      src: "https://i.postimg.cc/c44NQdGS/656400008-2937814809742072-419709997632154009-n.jpg",
+      src: "https://i.postimg.cc/gjK2WK9v/ts1.jpg",
       title: language === "en" ? "Group Adventures" : "গ্রুপ অ্যাডভেঞ্চার",
       description: language === "en" ? "Creating memories that last a lifetime." : "সারাজীবনের জন্য অমূল্য স্মৃতি তৈরি করা।",
       className: "md:col-span-2 md:row-span-2"
     },
     {
       id: 2,
-      src: "https://i.postimg.cc/yYQCj27J/656683194-2937814416408778-534490183140621319-n.jpg",
+      src: "https://i.postimg.cc/jdsjhBNM/ts10.jpg",
       title: language === "en" ? "Scenic Views" : "মনোরম দৃশ্য",
       description: language === "en" ? "Nature's beauty at its finest." : "প্রকৃতির অপরূপ সৌন্দর্য।",
       className: "md:col-span-1 md:row-span-1"
     },
     {
       id: 3,
-      src: "https://i.postimg.cc/yYQCj27m/660526147-3367469703415514-868498680945280906-n.jpg",
+      src: "https://i.postimg.cc/wT6BknJW/ts11.jpg",
       title: language === "en" ? "Travel Moments" : "ভ্রমণের মুহূর্ত",
       description: language === "en" ? "Capturing the essence of exploration." : "অন্বেষণের মূল নির্যাস ধারণ করা।",
       className: "hidden md:block md:col-span-1 md:row-span-1"
     },
     {
       id: 4,
-      src: "https://i.postimg.cc/ZK7zHXJv/g1.jpg",
+      src: "https://i.postimg.cc/qMjvDQX5/ts12.jpg",
       title: language === "en" ? "Local Culture" : "স্থানীয় সংস্কৃতি",
       description: language === "en" ? "Immerse yourself in authentic experiences." : "প্রকৃত অভিজ্ঞতায় নিজেকে নিমজ্জিত করুন।",
       className: "hidden md:block md:col-span-2 md:row-span-1"
     },
     {
       id: 6,
-      src: "https://i.postimg.cc/CLPp79wk/g2.jpg",
+      src: "https://i.postimg.cc/Pr25VKQG/ts13.jpg",
       title: language === "en" ? "Exploration" : "অন্বেষণ",
       description: language === "en" ? "Finding beauty in every corner." : "প্রতিটি কোণে সৌন্দর্য খুঁজে পাওয়া।",
       className: "hidden md:block md:col-span-1 md:row-span-1"
     },
     {
       id: 7,
-      src: "https://i.postimg.cc/RZW5DG0H/g3.jpg",
+      src: "https://i.postimg.cc/NfpjCbkt/ts14.jpg",
       title: language === "en" ? "Nature Escapes" : "প্রকৃতিতে পলায়ন",
       description: language === "en" ? "Breathe in the fresh mountain air." : "পাহাড়ের টাটকা বাতাসে শ্বাস নিন।",
       className: "hidden md:block md:col-span-1 md:row-span-1"
     },
     {
       id: 8,
-      src: "https://i.postimg.cc/nhXbPTLB/g4.jpg",
+      src: "https://i.postimg.cc/rFQwZgNk/ts15.jpg",
       title: language === "en" ? "Mountain Peaks" : "পাহাড়ের চূড়া",
       description: language === "en" ? "Climb higher for the best perspective." : "সেরা দৃষ্টিভঙ্গির জন্য আরও উঁচুতে আরোহণ করুন।",
       className: "hidden md:block md:col-span-1 md:row-span-1"
