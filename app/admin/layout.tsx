@@ -16,7 +16,8 @@ import {
   Search,
   PanelLeftClose,
   PanelLeftOpen,
-  Loader2
+  Loader2,
+  ClipboardList
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,6 +27,7 @@ import Image from "next/image";
 const sidebarItems = [
   { name: "Dashboard", icon: LayoutDashboard, href: "/admin" },
   { name: "Events", icon: Calendar, href: "/admin/events" },
+  { name: "Bookings", icon: ClipboardList, href: "/admin/bookings" },
   { name: "Hosts & Employees", icon: Users, href: "/admin/hosts" },
   { name: "Total Travelers", icon: Globe, href: "/admin/travelers" },
   { name: "Feedbacks", icon: MessageSquare, href: "/admin/feedbacks" },

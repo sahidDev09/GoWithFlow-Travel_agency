@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Plus, Search, Calendar, MapPin, 
   Edit2, Trash2, Filter, 
@@ -15,6 +15,29 @@ import { eventsData as initialEventsData } from "@/lib/admin-data";
 
 export default function EventsPage() {
   const [events, setEvents] = useState(initialEventsData);
+  const [editingEventId, setEditingEventId] = useState<number | null>(null);
+  const [eventToDelete, setEventToDelete] = useState<number | null>(null);
+  
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("customAdminEvents");
+      const deletedStored = localStorage.getItem("deletedAdminEvents");
+      const deletedIds = deletedStored ? JSON.parse(deletedStored) : [];
+      
+      let baseEvents = initialEventsData;
+      if (deletedIds.length > 0) {
+        baseEvents = baseEvents.filter(e => !deletedIds.includes(e.id));
+      }
+      
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        // eslint-disable-next-line
+        setEvents([...parsed, ...baseEvents]);
+      } else {
+        setEvents(baseEvents);
+      }
+    } catch {}
+  }, []);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -69,28 +92,9 @@ export default function EventsPage() {
     });
   };
 
-  const handleCreateEvent = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newEvent = {
-       id: events.length + 1,
-       title: formData.title,
-       date: formData.date,
-       location: formData.location,
-       bookings: 0,
-       capacity: parseInt(formData.capacity) || 0,
-       status: formData.status,
-       price: `${formData.price} ৳`,
-       image: formData.image || "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80",
-       // Additional info (stored but not necessarily shown in all views)
-       couplePrice: formData.couplePrice,
-       bookingMoney: formData.bookingMoney,
-       deadline: formData.deadline,
-       description: formData.description,
-       inclusions: formData.inclusions
-    };
-    
-    setEvents([newEvent as typeof initialEventsData[0], ...events]);
+  const closeModal = () => {
     setIsModalOpen(false);
+    setEditingEventId(null);
     setFormData({
       title: "",
       date: "",
@@ -105,6 +109,108 @@ export default function EventsPage() {
       description: "",
       inclusions: []
     });
+  };
+
+  const confirmDelete = (id: number) => {
+    setEventToDelete(id);
+  };
+
+  const executeDelete = () => {
+    if (eventToDelete !== null) {
+      const updatedEvents = events.filter(e => e.id !== eventToDelete);
+      setEvents(updatedEvents);
+
+      try {
+        const stored = localStorage.getItem("customAdminEvents");
+        if (stored) {
+          const parsedStored = JSON.parse(stored);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const filteredStored = parsedStored.filter((e: any) => e.id !== eventToDelete);
+          localStorage.setItem("customAdminEvents", JSON.stringify(filteredStored));
+        }
+
+        const deletedStored = localStorage.getItem("deletedAdminEvents");
+        const deletedIds = deletedStored ? JSON.parse(deletedStored) : [];
+        if (!deletedIds.includes(eventToDelete)) {
+          localStorage.setItem("deletedAdminEvents", JSON.stringify([...deletedIds, eventToDelete]));
+        }
+      } catch {}
+      setEventToDelete(null);
+    }
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleEdit = (event: any) => {
+    setEditingEventId(event.id);
+    setFormData({
+      title: event.title || "",
+      date: event.date || "",
+      location: event.location || "",
+      capacity: String(event.capacity || ""),
+      price: typeof event.price === "string" ? event.price.replace(/ ৳/g, "") : String(event.price || ""),
+      couplePrice: typeof event.couplePrice === "string" ? event.couplePrice.replace(/ ৳/g, "") : String(event.couplePrice || ""),
+      bookingMoney: typeof event.bookingMoney === "string" ? event.bookingMoney.replace(/ ৳/g, "") : String(event.bookingMoney || ""),
+      deadline: event.deadline || "",
+      status: event.status || "Draft",
+      image: event.image || "",
+      description: event.description || "",
+      inclusions: event.inclusions || []
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleSaveEvent = (e: React.FormEvent) => {
+    e.preventDefault();
+    const eventObj = {
+       id: editingEventId || Date.now(),
+       title: formData.title,
+       date: formData.date,
+       location: formData.location,
+       bookings: editingEventId ? (events.find(ev => ev.id === editingEventId)?.bookings || 0) : 0,
+       capacity: parseInt(formData.capacity) || 0,
+       status: formData.status,
+       price: `${formData.price} ৳`,
+       image: formData.image || "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80",
+       couplePrice: formData.couplePrice,
+       bookingMoney: formData.bookingMoney,
+       deadline: formData.deadline,
+       description: formData.description,
+       inclusions: formData.inclusions
+    };
+    
+    let updatedEvents;
+    if (editingEventId) {
+       updatedEvents = events.map(ev => ev.id === editingEventId ? eventObj : ev);
+    } else {
+       updatedEvents = [eventObj as typeof initialEventsData[0], ...events];
+    }
+    
+    setEvents(updatedEvents);
+    
+    try {
+      const stored = localStorage.getItem("customAdminEvents");
+      let parsedStored = stored ? JSON.parse(stored) : [];
+      if (editingEventId) {
+         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+         const isCustom = parsedStored.find((ev: any) => ev.id === editingEventId);
+         if (isCustom) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            parsedStored = parsedStored.map((ev: any) => ev.id === editingEventId ? eventObj : ev);
+         } else {
+            parsedStored = [eventObj, ...parsedStored];
+            const deletedStored = localStorage.getItem("deletedAdminEvents");
+            const deletedIds = deletedStored ? JSON.parse(deletedStored) : [];
+            if (!deletedIds.includes(editingEventId)) {
+               localStorage.setItem("deletedAdminEvents", JSON.stringify([...deletedIds, editingEventId]));
+            }
+         }
+      } else {
+         parsedStored = [eventObj, ...parsedStored];
+      }
+      localStorage.setItem("customAdminEvents", JSON.stringify(parsedStored));
+    } catch {}
+    
+    closeModal();
   };
 
   return (
@@ -133,7 +239,7 @@ export default function EventsPage() {
           <motion.button 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => { closeModal(); setIsModalOpen(true); }}
             className="flex items-center px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black shadow-xl shadow-indigo-200 dark:shadow-indigo-900/30 transition-all group"
           >
             <Plus size={20} className="mr-2 group-hover:rotate-90 transition-transform duration-300" />
@@ -226,10 +332,10 @@ export default function EventsPage() {
                       <p className="text-xl font-black text-white">{event.price}</p>
                     </div>
                     <div className="flex gap-2">
-                      <button className="p-3 bg-white/20 backdrop-blur-md text-white rounded-xl hover:bg-white/40 transition-colors border border-white/20">
+                      <button onClick={(e) => { e.stopPropagation(); handleEdit(event); }} className="p-3 bg-white/20 backdrop-blur-md text-white rounded-xl hover:bg-white/40 transition-colors border border-white/20">
                         <Edit2 size={16} />
                       </button>
-                      <button className="p-3 bg-white/20 backdrop-blur-md text-white rounded-xl hover:bg-rose-500/80 transition-colors border border-white/20">
+                      <button onClick={(e) => { e.stopPropagation(); confirmDelete(event.id); }} className="p-3 bg-white/20 backdrop-blur-md text-white rounded-xl hover:bg-rose-500/80 transition-colors border border-white/20">
                         <Trash2 size={16} />
                       </button>
                     </div>
@@ -325,10 +431,10 @@ export default function EventsPage() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button className="p-3 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-indigo-600 hover:text-white transition-all shadow-sm">
+                  <button onClick={(e) => { e.stopPropagation(); handleEdit(event); }} className="p-3 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-indigo-600 hover:text-white transition-all shadow-sm">
                     <Edit2 size={18} />
                   </button>
-                  <button className="p-3 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-rose-500 hover:text-white transition-all shadow-sm">
+                  <button onClick={(e) => { e.stopPropagation(); confirmDelete(event.id); }} className="p-3 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-rose-500 hover:text-white transition-all shadow-sm">
                     <Trash2 size={18} />
                   </button>
                 </div>
@@ -357,18 +463,18 @@ export default function EventsPage() {
             >
               <div className="p-8 pb-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800 shrink-0">
                 <div>
-                  <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Create New Journey</h2>
+                  <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{editingEventId ? "Edit Journey" : "Create New Journey"}</h2>
                   <p className="text-slate-500 font-medium">Define your next breathtaking adventure.</p>
                 </div>
                 <button 
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={closeModal}
                   className="p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-2xl transition-colors text-slate-400"
                 >
                   <X size={24} />
                 </button>
               </div>
 
-              <form onSubmit={handleCreateEvent} className="p-8 space-y-10 overflow-y-auto">
+              <form onSubmit={handleSaveEvent} className="p-8 space-y-10 overflow-y-auto">
                 {/* General Information */}
                 <div className="space-y-6">
                   <div className="flex items-center gap-3">
@@ -573,7 +679,7 @@ export default function EventsPage() {
                   <div className="flex-[1] flex gap-3 pt-6 sm:pt-0">
                     <button 
                       type="button"
-                      onClick={() => setIsModalOpen(false)}
+                      onClick={closeModal}
                       className="flex-1 py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-3xl font-black transition-all hover:bg-slate-200"
                     >
                       Dismiss
@@ -582,11 +688,53 @@ export default function EventsPage() {
                       type="submit"
                       className="flex-[2] py-4 bg-indigo-600 text-white rounded-3xl font-black shadow-xl shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition-all"
                     >
-                      Launch Journey
+                      {editingEventId ? "Save Changes" : "Launch Journey"}
                     </button>
                   </div>
                 </div>
               </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      {/* Delete Confirmation Modal */}
+      <AnimatePresence>
+        {eventToDelete !== null && (
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setEventToDelete(null)}
+              className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-2xl text-center"
+            >
+              <div className="w-16 h-16 bg-rose-100 dark:bg-rose-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Trash2 className="w-8 h-8 text-rose-600 dark:text-rose-400" />
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-2">Delete Journey?</h3>
+              <p className="text-slate-500 font-medium mb-8">
+                This action cannot be undone. Are you sure you want to permanently delete this event?
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setEventToDelete(null)}
+                  className="flex-1 py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-2xl font-black transition-all hover:bg-slate-200 dark:hover:bg-slate-700"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={executeDelete}
+                  className="flex-1 py-4 bg-rose-600 text-white rounded-2xl font-black shadow-xl shadow-rose-200 dark:shadow-none hover:bg-rose-700 transition-all"
+                >
+                  Yes, Delete
+                </button>
+              </div>
             </motion.div>
           </div>
         )}

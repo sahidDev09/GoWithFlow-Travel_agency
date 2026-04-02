@@ -88,6 +88,39 @@ const UpcomingEvents = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [bookingType, setBookingType] = useState<"solo" | "couple">("solo");
+  const [allEvents, setAllEvents] = useState<EventItem[]>([]);
+
+  useEffect(() => {
+    let customItems: EventItem[] = [];
+    try {
+      const stored = localStorage.getItem("customAdminEvents");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        customItems = parsed
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .filter((e: any) => e.status === "Active")
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .map((e: any) => ({
+            id: e.id,
+            destination: e.title || e.location,
+            date: e.date,
+            availableSeats: Math.max(0, (e.capacity || 0) - (e.bookings || 0)),
+            totalSeats: e.capacity || 10,
+            bookingDeadline: e.deadline && !isNaN(new Date(e.deadline).getTime()) 
+              ? new Date(e.deadline).toISOString() 
+              : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+            price: e.price,
+            couplePrice: e.couplePrice ? (e.couplePrice.includes("৳") ? e.couplePrice : `${e.couplePrice} ৳`) : "N/A",
+            bookingMoney: e.bookingMoney ? (e.bookingMoney.includes("৳") ? e.bookingMoney : `${e.bookingMoney} ৳`) : "N/A",
+            inclusions: e.inclusions || [],
+            image: e.image
+          }));
+      }
+    } catch {}
+    
+    // eslint-disable-next-line
+    setAllEvents([...customItems, ...t.events.items]);
+  }, [t.events.items]);
 
   const handleBookNow = (event: EventItem) => {
     setSelectedEvent(event);
@@ -95,8 +128,31 @@ const UpcomingEvents = () => {
     setIsModalOpen(true);
   };
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    const formData = new FormData(e.currentTarget);
+    const newBooking = {
+      id: Date.now(),
+      eventId: selectedEvent?.id,
+      eventName: selectedEvent?.destination,
+      eventDate: selectedEvent?.date,
+      bookingType,
+      fullName: formData.get("fullName"),
+      partnerName: formData.get("partnerName") || "",
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      transactionId: formData.get("transactionId"),
+      status: "Pending",
+      dateAdded: new Date().toISOString()
+    };
+
+    try {
+      const stored = localStorage.getItem("customAdminBookings");
+      const parsedStored = stored ? JSON.parse(stored) : [];
+      localStorage.setItem("customAdminBookings", JSON.stringify([newBooking, ...parsedStored]));
+    } catch {}
+
     setIsModalOpen(false);
     setShowSuccess(true);
   };
@@ -161,7 +217,7 @@ const UpcomingEvents = () => {
             pagination={{ clickable: true, dynamicBullets: true }}
             className="rounded-3xl shadow-2xl shadow-indigo-200/50 bg-white overflow-visible mb-12"
           >
-            {t.events.items.map((event) => (
+            {allEvents.map((event) => (
               <SwiperSlide key={event.id}>
                 <div className="flex flex-col lg:flex-row min-h-[500px]">
                   {/* Image Section */}
@@ -426,6 +482,7 @@ const UpcomingEvents = () => {
                           </label>
                           <input
                             required
+                            name="fullName"
                             type="text"
                             className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
                             placeholder="Sahid"
@@ -439,6 +496,7 @@ const UpcomingEvents = () => {
                             </label>
                             <input
                               required
+                              name="partnerName"
                               type="text"
                               className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
                               placeholder="Partner's Name"
@@ -452,6 +510,7 @@ const UpcomingEvents = () => {
                           </label>
                           <input
                             required
+                            name="phone"
                             type="tel"
                             className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
                             placeholder="01XXX-XXXXXX"
@@ -464,6 +523,7 @@ const UpcomingEvents = () => {
                           </label>
                           <input
                             required
+                            name="email"
                             type="email"
                             className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
                             placeholder="sahid@gmail.com"
@@ -478,6 +538,7 @@ const UpcomingEvents = () => {
                         </label>
                         <input
                           required
+                          name="transactionId"
                           type="text"
                           className="w-full px-5 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all font-medium placeholder:text-slate-300"
                           placeholder="TXN12345678"
